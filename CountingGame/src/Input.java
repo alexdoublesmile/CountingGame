@@ -1,5 +1,6 @@
-
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -7,128 +8,80 @@ class Input {
 
     private static int arrayNumber = 1;
     private static int arraySameNumber = 1;
+    private static ArrayList<String> playersList = new ArrayList<String>(arrayNumber);
+    private static ArrayList<String> samePlayersList = new ArrayList<String>(arraySameNumber);
+    private static ArrayList<Integer> fastPlayersList = new ArrayList<Integer>(arrayNumber);
     private static int countPlayers = 1;
     private static int wordsNumber;
     private static int numStep = 1;
-    private static String arrayCompany[] = new String[arrayNumber];
-    private static String arraySameCompany[] = new String[arraySameNumber];
     private static String outPlayer;
 
-    // "динамические" массивы положительных и отрицательных ответов
-    private static String[] positive = new String[]{"да", "давай", "ок", "ага", "угу", "конечно", "можно", "сыграем", "верно", "точно", "правильно", "хорошо", "будут", "y", "yes", "ok", "lf", "1"};
-    private static String[] negative = new String[]{"нет", "не", "неа", "хватит", "хорош", "yt", "ytn", "неверно", "0"};
-
-    // тест ввода положительных и отрицательных ответов
-    public static boolean positive(String tryPositive) {
-        while (tryPositive.equals("") || tryPositive.equals(" ")) {
-            Output.outputWhat();
-            tryPositive = inputString();
-        }
-        String MaybeYes = "";
-        if (!(Arrays.asList(negative).contains(tryPositive.toLowerCase())) && !(Arrays.asList(positive).contains(tryPositive.toLowerCase()))) {
-            while (!(MaybeYes.equals("1") || (MaybeYes.equals("2")))) {
-                Output.outputAnswer();
-                MaybeYes = inputString();
-                if (!(MaybeYes.equals("1") || (MaybeYes.equals("2")))) {
-                    Output.outputAnswerAgain();
-                }
-            }
-            if (MaybeYes.equals("1")) {
-                String ArrayCopy[] = Arrays.copyOf(positive, positive.length + 1);
-                positive = ArrayCopy;
-                positive[positive.length - 1] = tryPositive.toLowerCase();
-                return true;
-            } else {
-                String ArrayCopy[] = Arrays.copyOf(negative, negative.length + 1);
-                negative = ArrayCopy;
-                negative[negative.length - 1] = tryPositive.toLowerCase();
-                return false;
-            }
-
-        } else if (Arrays.asList(negative).contains(tryPositive.toLowerCase())) {
-            return false;
-        }
-        return true;
-    }
-
-    // тест ввода численных значений
-    public static int checkNumber() {
-        String number = inputString();
-        while (!(number.matches("[0-9]+"))) {
-            Output.outputCheckedNumber();
-            number = inputString();
-        }
-        int n = Integer.parseInt(number);
-        return n;
-    }
+    // lists of positive and negative answers
+    private static String[] positiveAnswerArray = new String[]{"да", "давай", "ок", "ага", "угу", "конечно", "можно", "сыграем", "верно", "точно", "правильно", "хорошо", "будут", "y", "yes", "ok", "lf", "1"};
+    private static HashSet<String> positiveAnswerList = new HashSet<String>(Arrays.asList(positiveAnswerArray));
+    private static String[] negativeAnswerArray = new String[]{"нет", "не", "неа", "хватит", "хорош", "yt", "ytn", "неверно", "0"};
+    private static HashSet<String> negativeAnswerList = new HashSet<String>(Arrays.asList(negativeAnswerArray));
 
     // ввод данных для быстрого счета
     public static void startFast() {
         Output.outputPlayersFast();
-        int n = Input.checkNumber();
+        arrayNumber = Input.checkNumber();
         Output.outputCountingFast();
-        int x = Input.checkNumber();
-        int company[] = new int[n];
-        Counting.countingFast(company, n, x);
+        wordsNumber = Input.checkNumber();
+        fastCountPlayers(fastPlayersList, arrayNumber);
+        countFast(fastPlayersList, arrayNumber, wordsNumber);
+        Counting.countingFast();
     }
 
     // инициализация участников для быстрого режима
-    public static void FastCountPlayers(int ArrayName[], int n) {
-        for(int i = 0; i < n; i++) {
-            ArrayName[i] = i + 1;
+    public static void fastCountPlayers(ArrayList<Integer> fastPlayersList, int n) {
+        for(int i = 1; i <= n; i++) {
+        	fastPlayersList.add(i);
         }
     }
 
     // счет в быстром режиме
-    public static void countFast(int ArrayName[], int n, int firstNum) {
+    public static void countFast(ArrayList<Integer> fastPlayersList, int n, int firstNum) {
         int lastNum = firstNum;
         while (n > 1) {
             if(lastNum % n > 0) {
-                for (int i = lastNum % n; i < n; i++) {
-                    ArrayName[i - 1] = ArrayName[i];
-                }
-                lastNum = (lastNum % n) + firstNum - 1;
+            	fastPlayersList.remove(lastNum % n - 1);
+                lastNum = lastNum % n + firstNum - 1;
             } else {
+            	fastPlayersList.remove(fastPlayersList.size() - 1);
                 lastNum = firstNum;
             }
-            int companyCopy2[] = new int[ArrayName.length - 1];
-            System.arraycopy(ArrayName, 0, companyCopy2, 0, companyCopy2.length);
-            ArrayName = companyCopy2;
             n--;
         }
-        Output.outputFastResult(ArrayName, n);
+        Output.outputFastResult(fastPlayersList, n);
     }
 
     // ввод имен участников
     public static void inputRegister() {
         Output.outputName(countPlayers);
-        arrayCompany[(arrayNumber - 1)] = inputString();
-        while (arrayCompany[(arrayNumber - 1)].equals("") || arrayCompany[arrayNumber - 1].equals(" ")) {
+        String player = inputString();
+        while (player.equals("") || player.equals(" ")) {
             Output.outputWhat();
-            arrayCompany[(arrayNumber - 1)] = inputString();
+            player = inputString();
         }
             countPlayers++;
         if (countPlayers == 2) {
-            String ArrayCopy[] = Arrays.copyOf(arrayCompany, arrayCompany.length + 1);
-            arrayCompany = ArrayCopy;
             arrayNumber++;
+            playersList.add(player);
             inputRegister();
         } else if (countPlayers > 2) {
             Output.outputNameAgain();
             String answer = inputString();
             if (!(positive(answer))) {
-
+            	countPlayers = 1;
+                playersList.add(player);
             } else {
-
-                String ArrayCopy[] = Arrays.copyOf(arrayCompany, arrayCompany.length + 1);
-                arrayCompany = ArrayCopy;
                 arrayNumber++;
+                playersList.add(player);
                 inputRegister();
             }
-            countPlayers = 1;
         }
-        String arrayForSameCompany[] = Arrays.copyOf(arrayCompany, arrayCompany.length);
-        arraySameCompany = arrayForSameCompany;
+        samePlayersList = playersList;
         arraySameNumber = arrayNumber;
     }
 
@@ -177,7 +130,7 @@ class Input {
 
     // ввод и вывод параметров и результатов
     public static void inputConditions() {
-        Output.outputConditions(arrayCompany, arrayNumber, wordsNumber);
+        Output.outputConditions(playersList, arrayNumber, wordsNumber);
     }
 
     // ввод выбора режима
@@ -216,47 +169,43 @@ class Input {
 
     // счет в детальном режиме
     public static void mainCount(int startNumber, int stepNumber, String order) {
-        String arrayForSameCompany[] = Arrays.copyOf(arrayCompany, arrayCompany.length);
-        arraySameCompany = arrayForSameCompany;
-        arraySameNumber = arrayNumber;
+    	ArrayList<String> forSamePlayersList = new ArrayList<String>(samePlayersList);
         Output.outputstartCounting();
-        Output.outputAllPlayers(arrayCompany, arrayNumber);
+        Output.outputAllPlayers(playersList, arrayNumber);
         int finalNumber = wordsNumber*stepNumber + (startNumber - 1);
         numStep = 1;
         while (arrayNumber > 1) {
             if (order.equals("1")) {
                 if(finalNumber % arrayNumber > 0) {
-                    outPlayer = arrayCompany[finalNumber % arrayNumber - 1];
-                    for (int i = finalNumber % arrayNumber; i < arrayNumber; i++) {
-                        arrayCompany[i - 1] = arrayCompany[i];
-                    }
+                    outPlayer = playersList.get(finalNumber % arrayNumber - 1);
+                    playersList.remove(finalNumber % arrayNumber - 1);
                     finalNumber = (finalNumber % arrayNumber) + wordsNumber*stepNumber - 1;
                 } else {
-                    outPlayer = arrayCompany[arrayNumber - 1];
+                    outPlayer = playersList.get(arrayNumber - 1);
+                    playersList.remove(playersList.size() - 1);
                     finalNumber = wordsNumber*stepNumber;
                 }
             } else {
                 if (finalNumber % arrayNumber > 0) {
-                    outPlayer = arrayCompany[finalNumber % arrayNumber - 1];
-                    for (int i = finalNumber % arrayNumber; i < arrayNumber; i++) {
-                        arrayCompany[i - 1] = arrayCompany[i];
-                    }
+                    outPlayer = playersList.get(finalNumber % arrayNumber - 1);
+                    playersList.remove(finalNumber % arrayNumber - 1);
                 } else {
-                    outPlayer = arrayCompany[arrayNumber - 1];
+                    outPlayer = playersList.get(arrayNumber - 1);
+                    playersList.remove(playersList.size() - 1);
                 }
             }
             /// текущее уменьшение массива во время счета
-            arrayCut(arrayCompany);
             arrayNumber--;
             /// текущий результат во время счета
-            Output.outputTempResult(arrayCompany, arrayNumber, numStep, outPlayer);
+            Output.outputTempResult(playersList, arrayNumber, numStep, outPlayer);
             numStep++;
         }
+        samePlayersList = forSamePlayersList;
     }
 
     // ввод и вывод результатов
     public static void inputResult() {
-        Output.outputResult(arrayCompany, arrayNumber);
+        Output.outputResult(playersList, arrayNumber);
     }
 
     // перезапуск
@@ -270,6 +219,8 @@ class Input {
                 Output.outputContinue();
                 inputContinue();
             } else  {
+            	fastPlayersList.clear();
+                arrayNumber = 1;
                 Counting.start();
             }
 
@@ -281,15 +232,17 @@ class Input {
         String countinue = inputString();
         switch (countinue) {
             case ("1"):
+            	playersList.clear();
+            	arrayNumber = 1;
                 Counting.start();
                 break;
             case ("2"):
-                arrayCompany = arraySameCompany;
+            	playersList = samePlayersList;
                 arrayNumber = arraySameNumber;
                 Counting.countingDetailSecond();
                 break;
             case ("3"):
-                arrayCompany = arraySameCompany;
+            	playersList = samePlayersList;
                 arrayNumber = arraySameNumber;
                 Counting.countingDetailThird();
                 break;
@@ -299,6 +252,48 @@ class Input {
         }
     }
 
+  
+    
+    // тест ввода положительных и отрицательных ответов
+    public static boolean positive(String tryPositive) {
+        while (tryPositive.equals("") || tryPositive.equals(" ")) {
+            Output.outputWhat();
+            tryPositive = inputString();
+        }
+        String maybeYes = "";
+        if (!(negativeAnswerList.contains(tryPositive.toLowerCase())) && !(positiveAnswerList.contains(tryPositive.toLowerCase()))) {
+            while (!(maybeYes.equals("1") || (maybeYes.equals("2")))) {
+                Output.outputAnswer();
+                maybeYes = inputString();
+                if (!(maybeYes.equals("1") || (maybeYes.equals("2")))) {
+                    Output.outputAnswerAgain();
+                }
+            }
+            if (maybeYes.equals("1")) {
+            	positiveAnswerList.add(tryPositive.toLowerCase());
+                return true;
+            } else {
+            	negativeAnswerList.add(tryPositive.toLowerCase());
+                return false;
+            }
+
+        } else if (negativeAnswerList.contains(tryPositive.toLowerCase())) {
+            return false;
+        }
+        return true;
+    }
+
+    // тест ввода численных значений
+    public static int checkNumber() {
+        String number = inputString();
+        while (!(number.matches("[0-9]+"))) {
+            Output.outputCheckedNumber();
+            number = inputString();
+        }
+        int n = Integer.parseInt(number);
+        return n;
+    }
+    
     // общий шаблон уменьшения массива
     public static void arrayCut(String ArrayName[]) {
         String ArrayCopy[] = new String[ArrayName.length - 1];
@@ -311,5 +306,45 @@ class Input {
         Scanner scanString = new Scanner(System.in);
         String s = scanString.nextLine();
         return s;
+    }
+    
+    // method-helpers
+    public static void getPositiveAnswersList() {
+    	System.out.println("-----------------------------------");
+    	for(String answer : positiveAnswerList) {
+        	System.out.println(answer);
+        }
+    	System.out.println("--- " + positiveAnswerList.size() + " ---");
+    	System.out.println("-----------------------------------");
+    }
+    
+    public static void getNegativeAnswersList() {
+    	System.out.println("-----------------------------------");
+    	for(String answer : negativeAnswerList) {
+        	System.out.println(answer);
+        }
+    	System.out.println("--- " + negativeAnswerList.size() + " ---");
+    	System.out.println("-----------------------------------");
+    }
+
+    public static void getPlayersList() {
+    	System.out.println("----------------playersList-------------------");
+    	for(String player : playersList) {
+        	System.out.println(player);
+        }
+    	System.out.println("--- " + playersList.size() + " ---");
+    	System.out.println("---arrayNumber-------- " + arrayNumber + " ------------------------");
+    	System.out.println("-----------------------------------");
+    }
+    
+    public static void getSamePlayersList() {
+    	System.out.println("-----------------samePlayersList------------------");
+    	for(String player : samePlayersList) {
+        	System.out.println(player);
+        }
+    	System.out.println("--- " + samePlayersList.size() + " ---");
+    	
+    	System.out.println("---arraySameNumber-------- " + arraySameNumber + " ------------------------");
+    	System.out.println("-----------------------------------");
     }
 }

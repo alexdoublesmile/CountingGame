@@ -1,4 +1,3 @@
-
 public class Counting {
 
     private static String Mode = "";
@@ -23,12 +22,7 @@ public class Counting {
         }
     }
 
-    public static void countingFast(int ArrayName[], int n, int firstNum) {
-        /// инициализация участников
-        Input.FastCountPlayers(ArrayName, n);
-        /// счет
-        Input.countFast(ArrayName, n, firstNum);
-        /// финал
+    public static void countingFast() {
         Output.outputAgain();
         Input.inputStartAgain();
     }

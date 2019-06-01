@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Output {
 
@@ -62,19 +63,19 @@ public class Output {
         System.out.println("");
     }
 
-    public static void outputAllPlayers(String ArrayName[], int arrayNumber) {
-        for (int i = 0; i < arrayNumber; i++) {
-            System.out.print(ArrayName[i] + "  ");
-        }
+    public static void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber) {
+        for (String j : arrayName) {
+        	System.out.print(j + "  ");
+        } 
         System.out.println("");
         System.out.println("");
     }
 
-    public static void outputConditions(String ArrayName[], int arrayNumber, int wordsNumber) {
+    public static void outputConditions(ArrayList<String> arrayName, int arrayNumber, int wordsNumber) {
         System.out.println("----------------------------------------------------------------");
         System.out.print("Принимают участие " + arrayNumber + " игроков:  ");
         for (int i = 0; i < arrayNumber; i++) {
-            System.out.print(ArrayName[i] + "  ");
+            System.out.print(arrayName.get(i) + "  ");
         }
         System.out.println("");
         System.out.println("А кол-во слов в считалочке = " + wordsNumber + ".");
@@ -108,37 +109,37 @@ public class Output {
     }
 
     // временный результат, выводимый при счете
-    public static void outputTempResult(String ArrayName[], int arrayNumber, int num, String out) {
+    public static void outputTempResult(ArrayList<String> arrayName, int arrayNumber, int num, String out) {
         if(!(arrayNumber == 1)) {
             System.out.println("Шаг " + num + ". Вылетает: " + out);
             System.out.println("Остаются: ");
             for (int i = 0; i < arrayNumber; i++) {
                 if(i == arrayNumber - 1) {
-                    System.out.print(ArrayName[i] + ".");
+                    System.out.print(arrayName.get(i) + ".");
                 } else {
-                    System.out.print(ArrayName[i] + ", ");
+                    System.out.print(arrayName.get(i) + ", ");
                 }
             }
             System.out.println("");
             System.out.println("");
         } else {
-            System.out.println("Шаг последний. Остаётся " + ArrayName[0] + ".");
+            System.out.println("Шаг последний. Остаётся " + arrayName.get(0) + ".");
             System.out.println("");
         }
     }
 
     // конечный результат детального счета
-    public static void outputResult(String ArrayName[], int arrayNumber) {
+    public static void outputResult(ArrayList<String> arrayName, int arrayNumber) {
         for (int i = 0; i < arrayNumber; i++) {
-            System.out.print("* Поздравляем Вас, " + ArrayName[i] + ". Вы - победитель! *");
+            System.out.print("* Поздравляем Вас, " + arrayName.get(i) + ". Вы - победитель! *");
         }
         System.out.println("");
     }
 
     // конечный результат быстрого счета
-    public static void outputFastResult(int ArrayName[], int arrayNumber) {
+    public static void outputFastResult(ArrayList<Integer> arrayName, int arrayNumber) {
         for (int i = 0; i < arrayNumber; i++) {
-            System.out.print("Остается: " + ArrayName[i]);
+            System.out.print("Остается: " + arrayName.get(i));
             System.out.println("");
         }
     }
