@@ -172,18 +172,18 @@ class Input {
     	ArrayList<String> forSamePlayersList = new ArrayList<String>(samePlayersList);
         Output.outputstartCounting();
         Output.outputAllPlayers(playersList, arrayNumber);
-        int finalNumber = wordsNumber*stepNumber + (startNumber - 1);
+        int finalNumber = wordsNumber*stepNumber - (stepNumber - 1) + (startNumber - 1);
         numStep = 1;
         while (arrayNumber > 1) {
             if (order.equals("1")) {
                 if(finalNumber % arrayNumber > 0) {
                     outPlayer = playersList.get(finalNumber % arrayNumber - 1);
                     playersList.remove(finalNumber % arrayNumber - 1);
-                    finalNumber = (finalNumber % arrayNumber) + wordsNumber*stepNumber - 1;
+                    finalNumber = (finalNumber % arrayNumber) + wordsNumber*stepNumber - (stepNumber - 1) - 1;
                 } else {
                     outPlayer = playersList.get(arrayNumber - 1);
                     playersList.remove(playersList.size() - 1);
-                    finalNumber = wordsNumber*stepNumber;
+                    finalNumber = wordsNumber*stepNumber - (stepNumber - 1);
                 }
             } else {
                 if (finalNumber % arrayNumber > 0) {
@@ -293,58 +293,16 @@ class Input {
         int n = Integer.parseInt(number);
         return n;
     }
-    
-    // общий шаблон уменьшения массива
-    public static void arrayCut(String ArrayName[]) {
-        String ArrayCopy[] = new String[ArrayName.length - 1];
-        System.arraycopy(ArrayName, 0, ArrayCopy, 0, ArrayCopy.length);
-        ArrayName = ArrayCopy;
-    }
 
     // общий шаблон ввода строковых данных
     public static String inputString() {
         Scanner scanString = new Scanner(System.in);
-        String s = scanString.nextLine();
+        String s = "";
+        if(scanString.hasNext()) {
+        	s = scanString.nextLine();
+        } else {
+            scanString.close();
+        }
         return s;
-    }
-    
-    // method-helpers
-    public static void getPositiveAnswersList() {
-    	System.out.println("-----------------------------------");
-    	for(String answer : positiveAnswerList) {
-        	System.out.println(answer);
-        }
-    	System.out.println("--- " + positiveAnswerList.size() + " ---");
-    	System.out.println("-----------------------------------");
-    }
-    
-    public static void getNegativeAnswersList() {
-    	System.out.println("-----------------------------------");
-    	for(String answer : negativeAnswerList) {
-        	System.out.println(answer);
-        }
-    	System.out.println("--- " + negativeAnswerList.size() + " ---");
-    	System.out.println("-----------------------------------");
-    }
-
-    public static void getPlayersList() {
-    	System.out.println("----------------playersList-------------------");
-    	for(String player : playersList) {
-        	System.out.println(player);
-        }
-    	System.out.println("--- " + playersList.size() + " ---");
-    	System.out.println("---arrayNumber-------- " + arrayNumber + " ------------------------");
-    	System.out.println("-----------------------------------");
-    }
-    
-    public static void getSamePlayersList() {
-    	System.out.println("-----------------samePlayersList------------------");
-    	for(String player : samePlayersList) {
-        	System.out.println(player);
-        }
-    	System.out.println("--- " + samePlayersList.size() + " ---");
-    	
-    	System.out.println("---arraySameNumber-------- " + arraySameNumber + " ------------------------");
-    	System.out.println("-----------------------------------");
     }
 }

@@ -64,8 +64,8 @@ public class Output {
     }
 
     public static void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber) {
-        for (String j : arrayName) {
-        	System.out.print(j + "  ");
+        for (String i : arrayName) {
+        	System.out.print(i + "  ");
         } 
         System.out.println("");
         System.out.println("");
