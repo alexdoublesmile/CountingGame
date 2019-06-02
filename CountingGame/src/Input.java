@@ -7,118 +7,135 @@ import java.util.regex.*;
 class Input {
 
     private static int arrayNumber = 1;
-    private static int arraySameNumber = 1;
+    private static int initialArrayNumber = 1;
     private static ArrayList<String> playersList = new ArrayList<String>(arrayNumber);
-    private static ArrayList<String> samePlayersList = new ArrayList<String>(arraySameNumber);
-    private static ArrayList<Integer> fastPlayersList = new ArrayList<Integer>(arrayNumber);
-    private static int countPlayers = 1;
+    private static ArrayList<String> initialPlayersList = new ArrayList<String>(initialArrayNumber);
+    private static ArrayList<Integer> fastCountPlayersList = new ArrayList<Integer>(arrayNumber);
     private static int wordsNumber;
-    private static int numStep = 1;
-    private static String outPlayer;
+    private static int numberOfPlayer = 1;
+    private static int countIndex = 0;
 
-    // lists of positive and negative answers
     private static String[] positiveAnswerArray = new String[]{"да", "давай", "ок", "ага", "угу", "конечно", "можно", "сыграем", "верно", "точно", "правильно", "хорошо", "будут", "y", "yes", "ok", "lf", "1"};
     private static HashSet<String> positiveAnswerList = new HashSet<String>(Arrays.asList(positiveAnswerArray));
     private static String[] negativeAnswerArray = new String[]{"нет", "не", "неа", "хватит", "хорош", "yt", "ytn", "неверно", "0"};
     private static HashSet<String> negativeAnswerList = new HashSet<String>(Arrays.asList(negativeAnswerArray));
 
-    // ввод данных для быстрого счета
-    public static void startFast() {
-        Output.outputPlayersFast();
+///////// working methods for Fast count /////////
+    
+    // starting for fast count
+    public static void startFastCount() {
+        Output.outputEnterPlayersFastCount();
         arrayNumber = Input.checkNumber();
-        Output.outputCountingFast();
+        Output.outputEnterCountingFastCount();
         wordsNumber = Input.checkNumber();
-        fastCountPlayers(fastPlayersList, arrayNumber);
-        countFast(fastPlayersList, arrayNumber, wordsNumber);
+        numberingOfPlayers(fastCountPlayersList, arrayNumber);
+        fastCount(fastCountPlayersList, arrayNumber, wordsNumber);
         Counting.countingFast();
     }
 
-    // инициализация участников для быстрого режима
-    public static void fastCountPlayers(ArrayList<Integer> fastPlayersList, int n) {
+    // initialization of players for fast count
+    public static void numberingOfPlayers(ArrayList<Integer> fastCountPlayersList, int n) {
         for(int i = 1; i <= n; i++) {
-        	fastPlayersList.add(i);
+        	fastCountPlayersList.add(i);
         }
     }
 
-    // счет в быстром режиме
-    public static void countFast(ArrayList<Integer> fastPlayersList, int n, int firstNum) {
-        int lastNum = firstNum;
-        while (n > 1) {
-            if(lastNum % n > 0) {
-            	fastPlayersList.remove(lastNum % n - 1);
-                lastNum = lastNum % n + firstNum - 1;
+    // fast count
+    public static void fastCount(ArrayList<Integer> fastCountPlayersList, int numberOfPlayers, int startIndex) {
+        int mainIndex = startIndex;
+        while (numberOfPlayers > 1) {
+            if(mainIndex % numberOfPlayers > 0) {
+            	fastCountPlayersList.remove(mainIndex % numberOfPlayers - 1);
+            	mainIndex = mainIndex % numberOfPlayers + startIndex - 1;
             } else {
-            	fastPlayersList.remove(fastPlayersList.size() - 1);
-                lastNum = firstNum;
+            	fastCountPlayersList.remove(fastCountPlayersList.size() - 1);
+            	mainIndex = startIndex;
             }
-            n--;
+            numberOfPlayers--;
         }
-        Output.outputFastResult(fastPlayersList, n);
+        Output.outputResultFastCount(fastCountPlayersList, numberOfPlayers);
     }
 
-    // ввод имен участников
-    public static void inputRegister() {
-        Output.outputName(countPlayers);
-        String player = inputString();
-        while (player.equals("") || player.equals(" ")) {
-            Output.outputWhat();
-            player = inputString();
-        }
-            countPlayers++;
-        if (countPlayers == 2) {
+///////// working methods for Detail count /////////
+    
+    // input players
+    public static void inputPlayerNames() {
+        Output.outputEnterName(numberOfPlayer);
+        String playerName = testPlayerName();
+            numberOfPlayer++;
+        if (numberOfPlayer == 2) {
             arrayNumber++;
-            playersList.add(player);
-            inputRegister();
-        } else if (countPlayers > 2) {
-            Output.outputNameAgain();
-            String answer = inputString();
-            if (!(positive(answer))) {
-            	countPlayers = 1;
-                playersList.add(player);
-            } else {
-                arrayNumber++;
-                playersList.add(player);
-                inputRegister();
-            }
+            playersList.add(playerName);
+            inputPlayerNames();
+        } else if (numberOfPlayer > 2) {
+            playersList.add(playerName);
+            askMorePlayers();
         }
-        samePlayersList = playersList;
-        arraySameNumber = arrayNumber;
+        copyDataFromPlayersList();
+    }
+    
+    public static String testPlayerName() {
+    	String playerName = inputAnyString();
+    	while (playerName.equals("") || playerName.equals(" ")) {
+            Output.outputWhat();
+            playerName = inputAnyString();
+        }
+    	return playerName;
     }
 
-    // ввод считалочки
-    public static void inputCounting() {
-        String counting = inputString();
-        if (counting.matches("[0-9]+")) {
-            wordsNumber = Integer.parseInt(counting);
+    public static void askMorePlayers() {
+    	Output.outputMorePlayers();
+        String answer = inputAnyString();
+        if (!(checkPositiveAnswer(answer))) {
+        	numberOfPlayer = 1;
         } else {
-            int severalWords = countWords(counting);
-            while (severalWords < 2) {
-                Output.outputWhat();
-                counting = inputString();
-                if (counting.matches("[0-9]+")) {
-                    wordsNumber = Integer.parseInt(counting);
-                    severalWords = wordsNumber;
-                    break;
-                } else
-                severalWords = countWords(counting);
-            }
-            Output.outputCountCheck(severalWords);
-            String scan = inputString();
-            if (!(positive(scan))) {
-                Output.outputCountCheckAgain(severalWords);
-                String scanMore = inputString();
-                if (!(positive(scanMore))) {
-                    Output.outputCountingAgain();
-                } else {
-                    wordsNumber = severalWords - 1;
-                }
-            } else {
-                wordsNumber = severalWords;
-            }
+            arrayNumber++;
+            inputPlayerNames();
         }
     }
+    
+    // input of counting
+    public static void inputCounting() {
+    	while(!(finishCount(countIndex))) {
+    		String someString = inputAnyString();
+            if (someString.matches("[0-9]+")) {
+            	countIndex = 1;
+                wordsNumber = Integer.parseInt(someString);
+            } else {
+            	wordsNumber = countNumberOfWords(someString);
+            }
+    	}
+    	countIndex = 0;
+    }
 
-    // подсчет слов считалочки
+    public static boolean finishCount(int index) {
+    	if (index == 1) {
+            return true;
+    	}
+        return false;
+    }
+    
+    public static int countNumberOfWords(String notNumberString) {
+    	int numberOfWords = 0;
+    	int severalWords = testForSeveralWords(notNumberString);
+    	numberOfWords = checkNumberOfWords(severalWords);
+        return numberOfWords;
+    }
+    
+    public static int testForSeveralWords(String notNumberString) {
+    	int severalWords = countWords(notNumberString);
+        while (severalWords < 2) {
+            Output.outputWhat();
+            String someString = inputAnyString();
+            if (someString.matches("[0-9]+")) {
+            	severalWords = Integer.parseInt(someString);
+            } else {
+            	severalWords = countWords(someString);
+            }
+        }
+        return severalWords;
+    }
+    
     public static int countWords(String counting) {
         int count = 0;
         Pattern pattern = Pattern.compile("[A-Za-z0-9А-Яа-я]+");
@@ -127,15 +144,38 @@ class Input {
             count++;
         return count;
     }
+    
+    public static int checkNumberOfWords(int severalWords) {
+    	int finalNumberOfWords = severalWords;
+    	Output.outputCountCheck(severalWords);
+        String answer = inputAnyString();
+        if (!(checkPositiveAnswer(answer))) {
+        	checkNumberOfWordsAgain(severalWords);
+        	return finalNumberOfWords - 1;
+        } else {
+        	countIndex = 1;
+            return finalNumberOfWords;
+        }
+    }
+    
+    public static void checkNumberOfWordsAgain(int severalWords) {
+    	Output.outputCountCheckAgain(severalWords);
+        String secondAnswer = inputAnyString();
+        if (!(checkPositiveAnswer(secondAnswer))) {
+            Output.outputEnterCountingAgain();
+        } else {
+        	countIndex = 1;
+        }
+    }
 
-    // ввод и вывод параметров и результатов
+    // view all settings
     public static void inputConditions() {
         Output.outputConditions(playersList, arrayNumber, wordsNumber);
     }
 
-    // ввод выбора режима
+    // choose Game mode
     public static void inputGameMode() {
-        String gameMode = inputString();
+        String gameMode = inputAnyString();
         switch (gameMode) {
             case ("1"):
                 mainCount(1, 1, "1");
@@ -152,28 +192,36 @@ class Input {
         }
     }
 
-    // ввод данных для пользовательского режима
+    // user Game mode settings
     public static void inputUserGameMode() {
-        Output.outputUserSettings();
+        Output.outputEnterUserSettings();
         int startNumber = checkNumber();
-        Output.outputUserSettingsStep();
+        
+        Output.outputEnterUserSettingsStep();
         int stepNumber = checkNumber();
-        Output.outputUserGameMode();
-        String order = inputString();
-        while (!(order.equals("1")) && !(order.equals("2"))) {
-            Output.outputAnswerAgain();
-            order = inputString();
-        }
+        
+        Output.outputEnterUserGameMode();
+        String order = testGameOrderInput();
         mainCount(startNumber, stepNumber, order);
     }
+    
+    public static String testGameOrderInput() {
+    	String orderInput = inputAnyString();
+        while (!(orderInput.equals("1")) && !(orderInput.equals("2"))) {
+            Output.outputAnswerAgain();
+            orderInput = inputAnyString();
+        }
+    	return orderInput;
+    }
 
-    // счет в детальном режиме
+    // main count
     public static void mainCount(int startNumber, int stepNumber, String order) {
-    	ArrayList<String> forSamePlayersList = new ArrayList<String>(samePlayersList);
+    	ArrayList<String> tempPlayersList = new ArrayList<String>(initialPlayersList);
         Output.outputstartCounting();
         Output.outputAllPlayers(playersList, arrayNumber);
         int finalNumber = wordsNumber*stepNumber - (stepNumber - 1) + (startNumber - 1);
-        numStep = 1;
+        int numStep = 1;
+        String outPlayer;
         while (arrayNumber > 1) {
             if (order.equals("1")) {
                 if(finalNumber % arrayNumber > 0) {
@@ -194,56 +242,50 @@ class Input {
                     playersList.remove(playersList.size() - 1);
                 }
             }
-            /// текущее уменьшение массива во время счета
             arrayNumber--;
-            /// текущий результат во время счета
             Output.outputTempResult(playersList, arrayNumber, numStep, outPlayer);
             numStep++;
         }
-        samePlayersList = forSamePlayersList;
+        initialPlayersList = tempPlayersList;
     }
 
-    // ввод и вывод результатов
+    // view all results
     public static void inputResult() {
         Output.outputResult(playersList, arrayNumber);
     }
 
-    // перезапуск
+    // play again
     public static void inputStartAgain() {
-        String was = Counting.mode();
-        String again = inputString();
-        if (!(positive(again))) {
+        String playedMode = Counting.mode();
+        String playAgain = inputAnyString();
+        if (!(checkPositiveAnswer(playAgain))) {
             Output.outputFinal();
         } else {
-            if(was.equals("2")) {
-                Output.outputContinue();
+            if(playedMode.equals("2")) {
+                Output.outputChooseContinue();
                 inputContinue();
             } else  {
-            	fastPlayersList.clear();
-                arrayNumber = 1;
+            	clearSettings();
                 Counting.start();
             }
 
         }
     }
-
-    // ввод условий перезапуска
+      
+    // play again settings
     public static void inputContinue() {
-        String countinue = inputString();
+        String countinue = inputAnyString();
         switch (countinue) {
             case ("1"):
-            	playersList.clear();
-            	arrayNumber = 1;
+            	clearSettings();
                 Counting.start();
                 break;
             case ("2"):
-            	playersList = samePlayersList;
-                arrayNumber = arraySameNumber;
+            	returnSettings();
                 Counting.countingDetailSecond();
                 break;
             case ("3"):
-            	playersList = samePlayersList;
-                arrayNumber = arraySameNumber;
+            	returnSettings();
                 Counting.countingDetailThird();
                 break;
             default:
@@ -252,57 +294,95 @@ class Input {
         }
     }
 
-  
-    
-    // тест ввода положительных и отрицательных ответов
-    public static boolean positive(String tryPositive) {
-        while (tryPositive.equals("") || tryPositive.equals(" ")) {
-            Output.outputWhat();
-            tryPositive = inputString();
-        }
-        String maybeYes = "";
-        if (!(negativeAnswerList.contains(tryPositive.toLowerCase())) && !(positiveAnswerList.contains(tryPositive.toLowerCase()))) {
-            while (!(maybeYes.equals("1") || (maybeYes.equals("2")))) {
-                Output.outputAnswer();
-                maybeYes = inputString();
-                if (!(maybeYes.equals("1") || (maybeYes.equals("2")))) {
-                    Output.outputAnswerAgain();
-                }
-            }
-            if (maybeYes.equals("1")) {
-            	positiveAnswerList.add(tryPositive.toLowerCase());
-                return true;
-            } else {
-            	negativeAnswerList.add(tryPositive.toLowerCase());
-                return false;
-            }
+///////// method-helpers /////////
 
-        } else if (negativeAnswerList.contains(tryPositive.toLowerCase())) {
-            return false;
-        }
+//input String and return it
+public static String inputAnyString() {
+    Scanner scanString = new Scanner(System.in);
+    String s = scanString.nextLine();
+    return s;
+}
+
+//test input for not "space" or "enter" and return it
+public static String checkString(String someString) {
+	while (someString.equals("") || someString.equals(" ")) {
+        Output.outputWhat();
+        someString = inputAnyString();
+    }
+	return someString;
+}
+
+//test input for number and return it
+public static int checkNumber() {
+    String number = inputAnyString();
+    while (!(number.matches("[0-9]+"))) {
+        Output.outputCheckedNumber();
+        number = inputAnyString();
+    }
+    int n = Integer.parseInt(number);
+    return n;
+}
+
+//test input for positive or negative answer
+public static boolean checkPositiveAnswer(String tryPositiveAnswer) {
+    tryPositiveAnswer = checkString(tryPositiveAnswer);
+    if (!(negativeAnswerList.contains(tryPositiveAnswer.toLowerCase())) && !(positiveAnswerList.contains(tryPositiveAnswer.toLowerCase()))) {
+    	if (additionalTestOfAnswer(tryPositiveAnswer)) {
+            return true;
+    	} else {
+    		return false;
+    	}
+    } else if (negativeAnswerList.contains(tryPositiveAnswer.toLowerCase())) {
+        return false;
+    }
+    return true;
+}
+
+public static boolean additionalTestOfAnswer(String someAnswer) {
+	String confirmationAnswer = checkAnswer(someAnswer);
+    if (confirmationAnswer.equals("1")) {
+    	positiveAnswerList.add(someAnswer.toLowerCase());
         return true;
+    } else {
+    	negativeAnswerList.add(someAnswer.toLowerCase());
+        return false;
     }
+}
 
-    // тест ввода численных значений
-    public static int checkNumber() {
-        String number = inputString();
-        while (!(number.matches("[0-9]+"))) {
-            Output.outputCheckedNumber();
-            number = inputString();
+public static String checkAnswer(String someAnswer) {
+	String confirmationAnswer = "";
+    while (!(confirmationAnswer.equals("1") || (confirmationAnswer.equals("2")))) {
+        Output.outputAnswer();
+        confirmationAnswer = inputAnyString();
+        if (!(confirmationAnswer.equals("1") || (confirmationAnswer.equals("2")))) {
+            Output.outputAnswerAgain();
         }
-        int n = Integer.parseInt(number);
-        return n;
     }
+    return confirmationAnswer;
+}
 
-    // общий шаблон ввода строковых данных
-    public static String inputString() {
-        Scanner scanString = new Scanner(System.in);
-        String s = "";
-        if(scanString.hasNext()) {
-        	s = scanString.nextLine();
-        } else {
-            scanString.close();
-        }
-        return s;
-    }
+public static void copyDataFromPlayersList() {
+	initialPlayersList = playersList;
+    initialArrayNumber = arrayNumber;
+}
+
+public static void copyDataToPlayersList() {
+	playersList = initialPlayersList;
+    arrayNumber = initialArrayNumber;
+}
+
+public static void clearSettings() {
+	fastCountPlayersList.clear();
+	playersList.clear();
+	initialPlayersList.clear();
+    arrayNumber = 1;
+    initialArrayNumber = 1;
+    countIndex = 0;
+}
+
+public static void returnSettings() {
+	playersList = initialPlayersList;
+    arrayNumber = initialArrayNumber;
+}
+
 }

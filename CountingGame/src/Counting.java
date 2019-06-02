@@ -9,7 +9,7 @@ public class Counting {
     public static void start() {
         Mode = "";
         Output.outputStart();
-        Mode = Input.inputString();
+        Mode = Input.inputAnyString();
         if(!(Mode.equals("1") || Mode.equals("2"))) {
             Output.outputAnswerAgain();
             start();
@@ -17,13 +17,13 @@ public class Counting {
         else if (Mode.equals("2")) {
             countingDetail();
         } else  {
-            Output.outputFastStart();
-            Input.startFast();
+            Output.outputFastCountRules();
+            Input.startFastCount();
         }
     }
 
     public static void countingFast() {
-        Output.outputAgain();
+        Output.outputPlayAgain();
         Input.inputStartAgain();
     }
 
@@ -32,44 +32,44 @@ public class Counting {
         Output.outputGreetings();
 
         /// регистрация участников
-        Input.inputRegister();
+        Input.inputPlayerNames();
 
         /// ввод считалочки
-        Output.outputCounting();
+        Output.outputEnterCounting();
         Input.inputCounting();
 
         /// вывод всех параметров
         Input.inputConditions();
 
         /// счет
-        Output.outputGameMode();
+        Output.outputChooseGameMode();
         Input.inputGameMode();
 
         /// результат
         Input.inputResult();
 
         /// финал
-        Output.outputAgain();
+        Output.outputPlayAgain();
         Input.inputStartAgain();
     }
 
     public static void countingDetailSecond() {
         /// ввод считалочки
-        Output.outputCounting();
+        Output.outputEnterCounting();
         Input.inputCounting();
 
         /// вывод всех параметров
         Input.inputConditions();
 
         /// счет
-        Output.outputGameMode();
+        Output.outputChooseGameMode();
         Input.inputGameMode();
 
         /// результат
         Input.inputResult();
 
         /// финал
-        Output.outputAgain();
+        Output.outputPlayAgain();
         Input.inputStartAgain();
     }
 
@@ -78,14 +78,14 @@ public class Counting {
         Input.inputConditions();
 
         /// счет
-        Output.outputGameMode();
+        Output.outputChooseGameMode();
         Input.inputGameMode();
 
         /// результат
         Input.inputResult();
 
         /// финал
-        Output.outputAgain();
+        Output.outputPlayAgain();
         Input.inputStartAgain();
     }
 }
