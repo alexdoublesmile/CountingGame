@@ -107,7 +107,6 @@ public class Output {
         System.out.println("- 2 - считать каждый раз с начала очереди");
     }
 
-    // временный результат, выводимый при счете
     public static void outputTempResult(ArrayList<String> arrayName, int arrayNumber, int num, String out) {
         if(!(arrayNumber == 1)) {
             System.out.println("Шаг " + num + ". Вылетает: " + out);
@@ -127,7 +126,6 @@ public class Output {
         }
     }
 
-    // конечный результат детального счета
     public static void outputResult(ArrayList<String> arrayName, int arrayNumber) {
         for (int i = 0; i < arrayNumber; i++) {
             System.out.print("* Поздравляем Вас, " + arrayName.get(i) + ". Вы - победитель! *");
@@ -135,7 +133,6 @@ public class Output {
         System.out.println("");
     }
 
-    // конечный результат быстрого счета
     public static void outputResultFastCount(ArrayList<Integer> arrayName, int arrayNumber) {
         for (int i = 0; i < arrayNumber; i++) {
             System.out.print("Остается: " + arrayName.get(i));
