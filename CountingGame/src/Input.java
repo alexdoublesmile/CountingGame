@@ -20,7 +20,7 @@ class Input {
     private static String[] negativeAnswerArray = new String[]{"нет", "не", "неа", "хватит", "хорош", "yt", "ytn", "неверно", "0"};
     private static HashSet<String> negativeAnswerList = new HashSet<String>(Arrays.asList(negativeAnswerArray));
 
-///////// working methods for Fast count /////////
+///////// working methods for Fast count ///////////////////////////////////////////////////////////////////////////////////////////////
     
     // starting for fast count
     public static void startFastCount() {
@@ -56,9 +56,9 @@ class Input {
         Output.outputResultFastCount(fastCountPlayersList, numberOfPlayers);
     }
 
-///////// working methods for Detail count /////////
+///////// working methods for Detail count /////////////////////////////////////////////////////////////////////////////////////////////////
     
-    // input players
+    // input players////////////////////////////////////////////
     public static void inputPlayerNames() {
         Output.outputEnterName(numberOfPlayer);
         String playerName = testPlayerName();
@@ -94,7 +94,7 @@ class Input {
         }
     }
     
-    // input of counting
+    // input of counting////////////////////////////////////////////
     public static void inputCounting() {
     	while(!(finishCount(countIndex))) {
     		String someString = inputAnyString();
@@ -173,7 +173,7 @@ class Input {
         Output.outputConditions(playersList, arrayNumber, wordsNumber);
     }
 
-    // choose Game mode
+    // choose Game mode//////////////////////////////////////////////////
     public static void inputGameMode() {
         String gameMode = inputAnyString();
         switch (gameMode) {
@@ -294,34 +294,7 @@ class Input {
         }
     }
 
-///////// method-helpers /////////
-
-//input String and return it
-public static String inputAnyString() {
-    Scanner scanString = new Scanner(System.in);
-    String s = scanString.nextLine();
-    return s;
-}
-
-//test input for not "space" or "enter" and return it
-public static String checkString(String someString) {
-	while (someString.equals("") || someString.equals(" ")) {
-        Output.outputWhat();
-        someString = inputAnyString();
-    }
-	return someString;
-}
-
-//test input for number and return it
-public static int checkNumber() {
-    String number = inputAnyString();
-    while (!(number.matches("[0-9]+"))) {
-        Output.outputCheckedNumber();
-        number = inputAnyString();
-    }
-    int n = Integer.parseInt(number);
-    return n;
-}
+///////// method-helpers ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //test input for positive or negative answer
 public static boolean checkPositiveAnswer(String tryPositiveAnswer) {
@@ -359,6 +332,33 @@ public static String checkAnswer(String someAnswer) {
         }
     }
     return confirmationAnswer;
+}
+
+//input String and return it
+public static String inputAnyString() {
+  Scanner scanString = new Scanner(System.in);
+  String s = scanString.nextLine();
+  return s;
+}
+
+//test input for not "space" or "enter" and return it
+public static String checkString(String someString) {
+	while (someString.equals("") || someString.equals(" ")) {
+      Output.outputWhat();
+      someString = inputAnyString();
+  }
+	return someString;
+}
+
+//test input for number and return it
+public static int checkNumber() {
+  String number = inputAnyString();
+  while (!(number.matches("[0-9]+"))) {
+      Output.outputCheckedNumber();
+      number = inputAnyString();
+  }
+  int n = Integer.parseInt(number);
+  return n;
 }
 
 public static void copyDataFromPlayersList() {
