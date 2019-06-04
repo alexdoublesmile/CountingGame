@@ -1,72 +1,32 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
+
 import java.util.Scanner;
-import java.util.regex.*;
 
 class Input {
 
-    private static int arrayNumber = 1;
-    private static int initialArrayNumber = 1;
-    private static ArrayList<String> playersList = new ArrayList<String>(arrayNumber);
-    private static ArrayList<String> initialPlayersList = new ArrayList<String>(initialArrayNumber);
-    private static ArrayList<Integer> fastCountPlayersList = new ArrayList<Integer>(arrayNumber);
-    private static int wordsNumber;
-    private static int numberOfPlayer = 1;
-    private static int countIndex = 0;
 
-    private static String[] positiveAnswerArray = new String[]{"да", "давай", "ок", "ага", "угу", "конечно", "можно", "сыграем", "верно", "точно", "правильно", "хорошо", "будут", "y", "yes", "ok", "lf", "1"};
-    private static HashSet<String> positiveAnswerList = new HashSet<String>(Arrays.asList(positiveAnswerArray));
-    private static String[] negativeAnswerArray = new String[]{"нет", "не", "неа", "хватит", "хорош", "yt", "ytn", "неверно", "0"};
-    private static HashSet<String> negativeAnswerList = new HashSet<String>(Arrays.asList(negativeAnswerArray));
-
+/*
 ///////// working methods for Fast count ///////////////////////////////////////////////////////////////////////////////////////////////
     
     // starting for fast count
-    public static void startFastCount() {
-        Output.outputEnterPlayersFastCount();
-        arrayNumber = Input.checkNumber();
-        Output.outputEnterCountingFastCount();
-        wordsNumber = Input.checkNumber();
-        numberingOfPlayers(fastCountPlayersList, arrayNumber);
-        fastCount(fastCountPlayersList, arrayNumber, wordsNumber);
-        Counting.countingFast();
-    }
+    
 
     // initialization of players for fast count
-    public static void numberingOfPlayers(ArrayList<Integer> fastCountPlayersList, int n) {
-        for(int i = 1; i <= n; i++) {
-        	fastCountPlayersList.add(i);
-        }
-    }
+    
 
     // fast count
-    public static void fastCount(ArrayList<Integer> fastCountPlayersList, int numberOfPlayers, int startIndex) {
-        int mainIndex = startIndex;
-        while (numberOfPlayers > 1) {
-            if(mainIndex % numberOfPlayers > 0) {
-            	fastCountPlayersList.remove(mainIndex % numberOfPlayers - 1);
-            	mainIndex = mainIndex % numberOfPlayers + startIndex - 1;
-            } else {
-            	fastCountPlayersList.remove(fastCountPlayersList.size() - 1);
-            	mainIndex = startIndex;
-            }
-            numberOfPlayers--;
-        }
-        Output.outputResultFastCount(fastCountPlayersList, numberOfPlayers);
-    }
+    
 
 ///////// working methods for Detail count /////////////////////////////////////////////////////////////////////////////////////////////////
     
     // input players////////////////////////////////////////////
     public static void inputPlayerNames() {
-        Output.outputEnterName(numberOfPlayer);
+        ConsoleView.outputEnterName(numberOfPlayer);
         String playerName = testPlayerName();
             numberOfPlayer++;
         if (numberOfPlayer == 2) {
             arrayNumber++;
             playersList.add(playerName);
-            inputPlayerNames();
+            	inputPlayerNames();
         } else if (numberOfPlayer > 2) {
             playersList.add(playerName);
             askMorePlayers();
@@ -74,17 +34,9 @@ class Input {
         copyDataFromPlayersList();
     }
     
-    public static String testPlayerName() {
-    	String playerName = inputAnyString();
-    	while (playerName.equals("") || playerName.equals(" ")) {
-            Output.outputWhat();
-            playerName = inputAnyString();
-        }
-    	return playerName;
-    }
 
     public static void askMorePlayers() {
-    	Output.outputMorePlayers();
+    	ConsoleView.outputMorePlayers();
         String answer = inputAnyString();
         if (!(checkPositiveAnswer(answer))) {
         	numberOfPlayer = 1;
@@ -125,7 +77,7 @@ class Input {
     public static int testForSeveralWords(String notNumberString) {
     	int severalWords = countWords(notNumberString);
         while (severalWords < 2) {
-            Output.outputWhat();
+            ConsoleView.outputWhat();
             String someString = inputAnyString();
             if (someString.matches("[0-9]+")) {
             	severalWords = Integer.parseInt(someString);
@@ -147,7 +99,7 @@ class Input {
     
     public static int checkNumberOfWords(int severalWords) {
     	int finalNumberOfWords = severalWords;
-    	Output.outputCountCheck(severalWords);
+    	ConsoleView.outputCountCheck(severalWords);
         String answer = inputAnyString();
         if (!(checkPositiveAnswer(answer))) {
         	checkNumberOfWordsAgain(severalWords);
@@ -159,10 +111,10 @@ class Input {
     }
     
     public static void checkNumberOfWordsAgain(int severalWords) {
-    	Output.outputCountCheckAgain(severalWords);
+    	ConsoleView.outputCountCheckAgain(severalWords);
         String secondAnswer = inputAnyString();
         if (!(checkPositiveAnswer(secondAnswer))) {
-            Output.outputEnterCountingAgain();
+            ConsoleView.outputEnterCountingAgain();
         } else {
         	countIndex = 1;
         }
@@ -170,7 +122,7 @@ class Input {
 
     // view all settings
     public static void inputConditions() {
-        Output.outputConditions(playersList, arrayNumber, wordsNumber);
+        ConsoleView.outputConditions(playersList, arrayNumber, wordsNumber);
     }
 
     // choose Game mode//////////////////////////////////////////////////
@@ -187,20 +139,20 @@ class Input {
                 inputUserGameMode();
                 break;
             default:
-                Output.outputAnswerAgain();
+                ConsoleView.outputAnswerAgain();
                 inputGameMode();
         }
     }
 
     // user Game mode settings
     public static void inputUserGameMode() {
-        Output.outputEnterUserSettings();
+        ConsoleView.outputEnterUserSettings();
         int startNumber = checkNumber();
         
-        Output.outputEnterUserSettingsStep();
+        ConsoleView.outputEnterUserSettingsStep();
         int stepNumber = checkNumber();
         
-        Output.outputEnterUserGameMode();
+        ConsoleView.outputEnterUserGameMode();
         String order = testGameOrderInput();
         mainCount(startNumber, stepNumber, order);
     }
@@ -208,7 +160,7 @@ class Input {
     public static String testGameOrderInput() {
     	String orderInput = inputAnyString();
         while (!(orderInput.equals("1")) && !(orderInput.equals("2"))) {
-            Output.outputAnswerAgain();
+            ConsoleView.outputAnswerAgain();
             orderInput = inputAnyString();
         }
     	return orderInput;
@@ -217,8 +169,8 @@ class Input {
     // main count
     public static void mainCount(int startNumber, int stepNumber, String order) {
     	ArrayList<String> tempPlayersList = new ArrayList<String>(initialPlayersList);
-        Output.outputstartCounting();
-        Output.outputAllPlayers(playersList, arrayNumber);
+        ConsoleView.outputstartCounting();
+        ConsoleView.outputAllPlayers(playersList, arrayNumber);
         int finalNumber = wordsNumber*stepNumber - (stepNumber - 1) + (startNumber - 1);
         int numStep = 1;
         String outPlayer;
@@ -243,7 +195,7 @@ class Input {
                 }
             }
             arrayNumber--;
-            Output.outputTempResult(playersList, arrayNumber, numStep, outPlayer);
+            ConsoleView.outputTempResult(playersList, arrayNumber, numStep, outPlayer);
             numStep++;
         }
         initialPlayersList = tempPlayersList;
@@ -251,138 +203,28 @@ class Input {
 
     // view all results
     public static void inputResult() {
-        Output.outputResult(playersList, arrayNumber);
+        ConsoleView.outputResult(playersList, arrayNumber);
     }
 
-    // play again
-    public static void inputStartAgain() {
-        String playedMode = Counting.mode();
-        String playAgain = inputAnyString();
-        if (!(checkPositiveAnswer(playAgain))) {
-            Output.outputFinal();
-        } else {
-            if(playedMode.equals("2")) {
-                Output.outputChooseContinue();
-                inputContinue();
-            } else  {
-            	clearSettings();
-                Counting.start();
-            }
-
-        }
-    }
-      
-    // play again settings
-    public static void inputContinue() {
-        String countinue = inputAnyString();
-        switch (countinue) {
-            case ("1"):
-            	clearSettings();
-                Counting.start();
-                break;
-            case ("2"):
-            	returnSettings();
-                Counting.countingDetailSecond();
-                break;
-            case ("3"):
-            	returnSettings();
-                Counting.countingDetailThird();
-                break;
-            default:
-                Output.outputAnswerAgain();
-                inputContinue();
-        }
-    }
+*/
 
 ///////// method-helpers ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//test input for positive or negative answer
-public static boolean checkPositiveAnswer(String tryPositiveAnswer) {
-    tryPositiveAnswer = checkString(tryPositiveAnswer);
-    if (!(negativeAnswerList.contains(tryPositiveAnswer.toLowerCase())) && !(positiveAnswerList.contains(tryPositiveAnswer.toLowerCase()))) {
-    	if (additionalTestOfAnswer(tryPositiveAnswer)) {
-            return true;
-    	} else {
-    		return false;
-    	}
-    } else if (negativeAnswerList.contains(tryPositiveAnswer.toLowerCase())) {
-        return false;
-    }
-    return true;
-}
 
-public static boolean additionalTestOfAnswer(String someAnswer) {
-	String confirmationAnswer = checkAnswer(someAnswer);
-    if (confirmationAnswer.equals("1")) {
-    	positiveAnswerList.add(someAnswer.toLowerCase());
-        return true;
-    } else {
-    	negativeAnswerList.add(someAnswer.toLowerCase());
-        return false;
-    }
-}
 
-public static String checkAnswer(String someAnswer) {
-	String confirmationAnswer = "";
-    while (!(confirmationAnswer.equals("1") || (confirmationAnswer.equals("2")))) {
-        Output.outputAnswer();
-        confirmationAnswer = inputAnyString();
-        if (!(confirmationAnswer.equals("1") || (confirmationAnswer.equals("2")))) {
-            Output.outputAnswerAgain();
-        }
-    }
-    return confirmationAnswer;
-}
 
 //input String and return it
-public static String inputAnyString() {
-  Scanner scanString = new Scanner(System.in);
-  String s = scanString.nextLine();
-  return s;
-}
-
+	public String inputAnyString() {
+	  Scanner scanString = new Scanner(System.in);
+	  String s = scanString.nextLine();
+	  return s;
+	}
+	
 //test input for not "space" or "enter" and return it
-public static String checkString(String someString) {
-	while (someString.equals("") || someString.equals(" ")) {
-      Output.outputWhat();
-      someString = inputAnyString();
-  }
-	return someString;
-}
-
-//test input for number and return it
-public static int checkNumber() {
-  String number = inputAnyString();
-  while (!(number.matches("[0-9]+"))) {
-      Output.outputCheckedNumber();
-      number = inputAnyString();
-  }
-  int n = Integer.parseInt(number);
-  return n;
-}
-
-public static void copyDataFromPlayersList() {
-	initialPlayersList = playersList;
-    initialArrayNumber = arrayNumber;
-}
-
-public static void copyDataToPlayersList() {
-	playersList = initialPlayersList;
-    arrayNumber = initialArrayNumber;
-}
-
-public static void clearSettings() {
-	fastCountPlayersList.clear();
-	playersList.clear();
-	initialPlayersList.clear();
-    arrayNumber = 1;
-    initialArrayNumber = 1;
-    countIndex = 0;
-}
-
-public static void returnSettings() {
-	playersList = initialPlayersList;
-    arrayNumber = initialArrayNumber;
-}
-
+	public boolean checkString(String someString) {
+		if(someString.equals("") || someString.equals(" ")) {
+	      return false;
+	  }
+		return true;
+	}
 }
