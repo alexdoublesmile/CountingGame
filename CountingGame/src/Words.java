@@ -7,7 +7,6 @@ public class Words {
     private int wordsNumber;
     private int someNumber = 0;
 	private String someString = "";
-    private int countIndex = 0;
 	
 	public String getSomeString() {
 		return someString;
@@ -70,27 +69,4 @@ public class Words {
             count++;
         return count;
     }
-
-	public boolean finishCount(int index) {
-    	if (index == 1) {
-            return true;
-    	}
-        return false;
-    }
-	
-    public int getCountIndex() {
-		return countIndex;
-	}
-    
-	public void setCountIndex(int countIndex) {
-		this.countIndex = countIndex;
-	}
-
-	public void resetCountIndex() {
-		this.countIndex = 0;
-	}
-	
-	public void increaseCountIndex() {
-		this.countIndex = 1;
-	}
 }

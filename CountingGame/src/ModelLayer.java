@@ -66,10 +66,6 @@ public interface ModelLayer {
 	void setNumberOfPlayer(Players players, int s);
 	void increaseNumberOfPlayer(Players players);
 	void resetNumberOfPlayer(Players players);
-	void getCountIndex(Words wordsNumber);
-	void resetCountIndex(Words wordsNumber);
-	void increaseCountIndex(Words wordsNumber);
-	boolean finishCount(Words wordsNumber);
 	void fastCalc(Calculate calculate, ArrayList<Integer> fastCountPlayersList, int arrayNumber, int wordsNumber);
 
 ///////	----- new count --- ///////

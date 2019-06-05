@@ -238,29 +238,6 @@ public class InputLayer implements ModelLayer {
 	public void resetNumberOfPlayer(Players players) {
 		players.resetNumberOfPlayer();
 	}
-		
-    @ Override
-	public void getCountIndex(Words words) {
-		words.getCountIndex();
-	}
-
-    @ Override
-	public void resetCountIndex(Words words) {
-		words.resetCountIndex();
-	}
-	
-    @ Override
-	public void increaseCountIndex(Words words) {
-		words.increaseCountIndex();
-	}
-	
-    @ Override
-	public boolean finishCount(Words words) {
-    	if (words.finishCount(words.getCountIndex())) {
-            return true;
-    	}
-        return false;
-    }
 	
     @ Override
 	public void fastCalc(Calculate calculate, ArrayList<Integer> fastCountPlayersList, int arrayNumber, int wordsNumber) {
