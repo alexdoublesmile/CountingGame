@@ -53,9 +53,12 @@ public interface ModelLayer {
 	void setStartNumber(Calculate calculate, int i);
 	int getStepNumber(Calculate calculate);
 	void setStepNumber(Calculate calculate, int i);
-	String getGameOrder(Calculate calculate);
-	void setGameOrder(Calculate calculate, String s);
-	void increaseGameOrder(Calculate calculate);
+	String getCountOrder(Calculate calculate);
+	void setCountOrder(Calculate calculate, String s);
+	void showCountOrder(Calculate calculate);
+	void increaseCountOrder(Calculate calculate);
+	void increaseMoreCountOrder(Calculate calculate);
+	void resetCountOrder(Calculate calculate);
 	int getFinalNumber(Calculate calculate);
 	void setFinalNumber(Calculate calculate, int i);
 	int getNumStep(Calculate calculate);
@@ -64,7 +67,8 @@ public interface ModelLayer {
 	void increaseNumStep(Calculate calculate);
 	String getOutPlayer(Calculate calculate);
 	void setOutPlayer(Calculate calculate, String s);
-	void mainCalc(Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber, String order);
+	public void showOutPlayer(Calculate calculate);
+	void mainCalc(Players players, Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber);
 
 ////////////--- fast count ---  ////////////	
 
@@ -80,7 +84,7 @@ public interface ModelLayer {
 
 ///////	----- new count --- ///////
 
-	void newCalc(Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber);
+	void newCalc(Players players, Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////--- Service and Answers methods ---////////////////////////////////////////////////////////////////

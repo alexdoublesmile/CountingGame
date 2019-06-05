@@ -112,11 +112,13 @@ public class ConsoleView implements View {
         System.out.println("- 1 - Все стоят кружком. Считаем от начала до конца навылет");
         System.out.println("- 2 - Все стоят в ряд. Считаем каждый раз с начала ряда");
         System.out.println("- 3 - Свои правила");
-
+        /*
+        System.out.println("- 4 - New rules");
+        */
     }
 
     @ Override
-    public  void outputEnterUserSettings() {
+    public  void outputSetCountStartNumber() {
         System.out.println("----------------------------------------------------------------");
         System.out.println("Чтобы создать свои правила, следует ввести дополнительные данные ");
         System.out.println("");
@@ -124,12 +126,12 @@ public class ConsoleView implements View {
     }
 
     @ Override
-    public  void outputEnterUserSettingsStep() {
+    public  void outputSetCountStepNumber() {
         System.out.println("Введите шаг, с которым следует вести счет: ");
     }
 
     @ Override
-    public  void outputEnterUserGameMode() {
+    public  void outputSetCountOrder() {
         System.out.println("Выберите порядок счета после вылета одного из участников:");
         System.out.println("- 1 - считать с участника, следующего за вылетающим");
         System.out.println("- 2 - считать каждый раз с начала очереди");

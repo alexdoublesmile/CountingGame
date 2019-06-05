@@ -18,11 +18,9 @@ public class Words {
 	}
 	
 	public void showSomeString() {
-		System.out.println("");
 		System.out.println("-----------------------------------");
 		System.out.println("SomeString is " + someString);
 		System.out.println("-----------------------------------");
-		System.out.println("");		
 	}
 	
     public int getSomeNumber() {
@@ -34,11 +32,9 @@ public class Words {
 	}
 
 	public void showSomeNumber() {
-		System.out.println("");
 		System.out.println("-----------------------------------");
 		System.out.println("SomeNumber is " + someNumber);
 		System.out.println("-----------------------------------");
-		System.out.println("");		
 	}
 
 	public int getWordsNumber() {
@@ -54,11 +50,9 @@ public class Words {
 	}
 		
 	public void showWordsNumber() {
-		System.out.println("");
 		System.out.println("-----------------------------------");
 		System.out.println("WordsNumber is " + wordsNumber);
 		System.out.println("-----------------------------------");
-		System.out.println("");		
 	}
 	
 	public String inputAnyString() {

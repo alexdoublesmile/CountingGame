@@ -16,9 +16,9 @@ public interface View {
 	void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber);  
 	void outputConditions(ArrayList<String> arrayName, int arrayNumber, int wordsNumber);  
 	void outputChooseGameMode();  
-	void outputEnterUserSettings();  
-	void outputEnterUserSettingsStep();  
-	void outputEnterUserGameMode();  
+	void outputSetCountStartNumber();  
+	void outputSetCountStepNumber();  
+	void outputSetCountOrder();  
 	void outputTempResult(ArrayList<String> arrayName, int arrayNumber, int num, String out);  
 	void outputResult(ArrayList<String> arrayName, int arrayNumber);  
 	void outputResultFastCount(ArrayList<Integer> arrayName);  

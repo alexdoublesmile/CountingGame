@@ -26,11 +26,9 @@ public class Players {
 	}
 	
 	public void showArrayNumber() {
-		System.out.println("");
 		System.out.println("-----------------------------------");
 		System.out.println("ArrayNumber is " + arrayNumber);
 		System.out.println("-----------------------------------");
-		System.out.println("");
 	}
 	
 	public int getInitialArrayNumber() {
@@ -102,7 +100,7 @@ public class Players {
 			System.out.print(i + " ");
 		}
 		System.out.println("");
-		System.out.println("");
+		System.out.println("-------------------------------------------------");
 	}
 	
 	public void showInitialPlayersList() {
@@ -112,7 +110,7 @@ public class Players {
 			System.out.print(i + " ");
 		}
 		System.out.println("");
-		System.out.println("");
+		System.out.println("-------------------------------------------------");
 	}
 	
 	public void showFastCountPlayersList() {
@@ -122,7 +120,7 @@ public class Players {
 			System.out.print(i + " ");
 		}
 		System.out.println("");
-		System.out.println("");
+		System.out.println("-------------------------------------------------");
 	}
 	
 	public void copySettings() {

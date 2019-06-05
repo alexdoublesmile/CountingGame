@@ -53,7 +53,7 @@ public class Answers {
         	System.out.println(s);
         }
 		System.out.println("");
-		System.out.println("");
+		System.out.println("-------------------------------------------------");
 	}
 	
 	public void showNegativeAnswerList() {
@@ -63,7 +63,7 @@ public class Answers {
         	System.out.println(s);
         }
 		System.out.println("");
-		System.out.println("");
+		System.out.println("-------------------------------------------------");
 	}
 	
 	 public HashSet<String> getPositiveAnswerList() {

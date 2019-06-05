@@ -7,7 +7,7 @@ public class Calculate {
 	private int numStep = 1;
 	private int finalNumber = 0;
 	private int fastCountFinalNumber = 0;
-	private String gameOrder = "1";
+	private String countOrder = "1";
 	private String outPlayer = "";
 	
 	public int getFinalNumber() {
@@ -19,6 +19,7 @@ public class Calculate {
 	public void showFinalNumber() {
 		System.out.println("-------------------------------------------------");
 	    System.out.println("showFinalNumber: " + getFinalNumber());
+	    System.out.println("-------------------------------------------------");
 	}
 	public int getNumStep() {
 		return numStep;
@@ -35,6 +36,7 @@ public class Calculate {
 	public void showNumStep() {
 		System.out.println("-------------------------------------------------");
 	    System.out.println("showNumStep: " + getNumStep());
+	    System.out.println("-------------------------------------------------");
 	}
 	public String getOutPlayer() {
 		return outPlayer;
@@ -45,6 +47,7 @@ public class Calculate {
 	public void showOutPlayer() {
 		System.out.println("-------------------------------------------------");
 	    System.out.println("showOutPlayer: " + getOutPlayer());
+	    System.out.println("-------------------------------------------------");
 	}
 	public int getStartNumber() {
 		return startNumber;
@@ -58,25 +61,36 @@ public class Calculate {
 	public void setStepNumber(int stepNumber) {
 		this.stepNumber = stepNumber;
 	}
-	public String getGameOrder() {
-		return gameOrder;
+	public String getCountOrder() {
+		return countOrder;
 	}
-	public void setGameOrder(String gameOrder) {
-		this.gameOrder = gameOrder;
+	public void setCountOrder(String countOrder) {
+		this.countOrder = countOrder;
 	}
-	public void increaseGameOrder() {
-		gameOrder = "2";
+	public void showCountOrder() {
+		System.out.println("-------------------------------------------------");
+	    System.out.println("showCountOrder: " + getCountOrder());
+	    System.out.println("-------------------------------------------------");
+	}
+	public void increaseCountOrder() {
+		countOrder = "2";
+	}
+	public void increaseMoreCountOrder() {
+		countOrder = "3";
+	}
+	public void resetCountOrder() {
+		this.countOrder = "1";
 	}
 	
-	void mainCalc(ArrayList<String> playersList, int arrayNumber, int wordsNumber, String order) {
-		if (order.equals("1")) {
+	void mainCalc(Players players, ArrayList<String> playersList, int arrayNumber, int wordsNumber) {
+		if (countOrder.equals("1")) {
             if(finalNumber % arrayNumber > 0) {
                 outPlayer = playersList.get(finalNumber % arrayNumber - 1);
                 playersList.remove(finalNumber % arrayNumber - 1);
                 finalNumber = (finalNumber % arrayNumber) + wordsNumber*stepNumber - (stepNumber - 1) - 1;
             } else {
                 outPlayer = playersList.get(arrayNumber - 1);
-                playersList.remove(playersList.size() - 1);
+                playersList.remove(playersList.get(arrayNumber - 1));
                 finalNumber = wordsNumber*stepNumber - (stepNumber - 1);
             }
         } else {
@@ -85,7 +99,7 @@ public class Calculate {
                 playersList.remove(finalNumber % arrayNumber - 1);
             } else {
                 outPlayer = playersList.get(arrayNumber - 1);
-                playersList.remove(playersList.size() - 1);
+                playersList.remove(playersList.get(arrayNumber - 1));
             }
         }
 	}
@@ -104,8 +118,10 @@ public class Calculate {
         }
     }
 	
-	void newCalc(ArrayList<String> fastCountPlayersList, int arrayNumber, int wordsNumber) {	
-        /// new counting method
+	void newCalc(Players players, ArrayList<String> playersList, int arrayNumber, int wordsNumber) {	
 		
+        /// new counting method
+           
+        
     }
 }
