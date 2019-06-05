@@ -235,8 +235,8 @@ public class Controller {
 	}
 	
 	void calculate(Players players, Words words, Answers answer, Calculate calculate, Mode mode) {
-    	view.outputstartCounting();
-        view.outputAllPlayers(modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players));
+    	view.outputstartCounting(modelLayer.getStartNumber(calculate), modelLayer.getStepNumber(calculate));
+        view.outputAllPlayers(modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getWordsNumber(words));
         modelLayer.resetNumStep(calculate);
         modelLayer.setFinalNumber(calculate, modelLayer.getWordsNumber(words)*modelLayer.getStepNumber(calculate) - modelLayer.getStepNumber(calculate) + modelLayer.getStartNumber(calculate));
         while(modelLayer.getArrayNumber(players) > 1) {
@@ -340,7 +340,7 @@ public class Controller {
     
     public void checkAnswerChoice(Words words, Answers answer) {
         while (!(modelLayer.getConfirmationAnswer(answer).equals("1") || (modelLayer.getConfirmationAnswer(answer).equals("2")))) {
-            view.outputIncorrectAnswer();
+//            view.outputIncorrectAnswer();
             view.outputIncorrectChoose();
         	modelLayer.setConfirmationAnswer(answer, modelLayer.inputAnyString(words));
         }

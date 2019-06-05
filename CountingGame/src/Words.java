@@ -16,25 +16,13 @@ public class Words {
 	public void setSomeString(String someString) {
 		this.someString = someString;
 	}
-	
-	public void showSomeString() {
-		System.out.println("-----------------------------------");
-		System.out.println("SomeString is " + someString);
-		System.out.println("-----------------------------------");
-	}
-	
+		
     public int getSomeNumber() {
 		return someNumber;
 	}
 
 	public void setSomeNumber(int someNumber) {
 		this.someNumber = someNumber;
-	}
-
-	public void showSomeNumber() {
-		System.out.println("-----------------------------------");
-		System.out.println("SomeNumber is " + someNumber);
-		System.out.println("-----------------------------------");
 	}
 
 	public int getWordsNumber() {
@@ -48,13 +36,7 @@ public class Words {
 	public void resetWordsNumber() {
 		this.wordsNumber = 0;
 	}
-		
-	public void showWordsNumber() {
-		System.out.println("-----------------------------------");
-		System.out.println("WordsNumber is " + wordsNumber);
-		System.out.println("-----------------------------------");
-	}
-	
+			
 	public String inputAnyString() {
 	  Scanner scanString = new Scanner(System.in);
 	  String s = scanString.nextLine();
@@ -96,7 +78,6 @@ public class Words {
         return false;
     }
 	
-
     public int getCountIndex() {
 		return countIndex;
 	}

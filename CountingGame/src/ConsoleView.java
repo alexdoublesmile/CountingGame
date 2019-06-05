@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ConsoleView implements View {
 
@@ -77,7 +78,10 @@ public class ConsoleView implements View {
     }
 
     @ Override
-    public  void outputstartCounting() {
+    public  void outputstartCounting(int n, int i) {
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("Начинаем с игрока №" + n + ", ");
+        System.out.println("    счет ведем с шагом \"" + i + "\"(т.е. считается каждый " + i + ")");
         System.out.println("----------------------------------------------------------------");
         System.out.println("--------------------   Поехали!!!  -----------------------------");
         System.out.println("----------------------------------------------------------------");
@@ -85,10 +89,13 @@ public class ConsoleView implements View {
     }
 
     @ Override
-    public void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber) {
-        for (String i : arrayName) {
-        	System.out.print(i + "  ");
-        } 
+    public void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber, int w) {
+        System.out.println("Все участники(считаем до " + w + "): ");
+    	int n = 1;
+        for (String s : arrayName) {
+        	System.out.println("  " + n + ") \"" + s + "\"");
+        	n++;
+        }
         System.out.println("");
         System.out.println("");
     }
@@ -96,9 +103,11 @@ public class ConsoleView implements View {
     @ Override
     public  void outputConditions(ArrayList<String> arrayName, int arrayNumber, int wordsNumber) {
         System.out.println("----------------------------------------------------------------");
-        System.out.print("Принимают участие " + arrayNumber + " игроков:  ");
-        for (int i = 0; i < arrayNumber; i++) {
-            System.out.print(arrayName.get(i) + "  ");
+        System.out.println("Принимают участие " + arrayNumber + " игроков:  ");
+        int n = 1;
+        for (String s : arrayName) {
+        	System.out.println("  " + n + ") \"" + s + "\"");
+        	n++;
         }
         System.out.println("");
         System.out.println("А кол-во слов в считалочке = " + wordsNumber + ".");
@@ -142,12 +151,10 @@ public class ConsoleView implements View {
         if(!(arrayNumber == 1)) {
             System.out.println("Шаг " + num + ". Вылетает: " + out);
             System.out.println("Остаются: ");
-            for (int i = 0; i < arrayNumber; i++) {
-                if(i == arrayNumber - 1) {
-                    System.out.print(arrayName.get(i) + ".");
-                } else {
-                    System.out.print(arrayName.get(i) + ", ");
-                }
+            int n = 1;
+            for (String s : arrayName) {
+            	System.out.println("  " + n + ") \"" + s + "\"");
+            	n++;
             }
             System.out.println("");
             System.out.println("");
@@ -221,4 +228,195 @@ public class ConsoleView implements View {
     public void outputCheckedNumber() {
         System.out.println("Введите, пожлуйста, значение в виде числа");
     }
+    
+    @ Override
+    public void showFinalNumber(Calculate calculate) {
+		System.out.println("-------------------------------------------------");
+	    System.out.println("showFinalNumber: " + calculate.getFinalNumber());
+	    System.out.println("-------------------------------------------------");
+	}
+    
+    @ Override
+    public void showNumStep(Calculate calculate) {
+		System.out.println("-------------------------------------------------");
+	    System.out.println("showNumStep: " + calculate.getNumStep());
+	    System.out.println("-------------------------------------------------");
+	}
+    
+    @ Override
+    public void showOutPlayer(Calculate calculate) {
+		System.out.println("-------------------------------------------------");
+	    System.out.println("showOutPlayer: " + calculate.getOutPlayer());
+	    System.out.println("-------------------------------------------------");
+	}
+    
+    @ Override
+    public void showCountOrder(Calculate calculate) {
+		System.out.println("-------------------------------------------------");
+	    System.out.println("showCountOrder: " + calculate.getCountOrder());
+	    System.out.println("-------------------------------------------------");
+	}
+    
+    @ Override
+	public void showArrayNumber(Players players) {
+		System.out.println("-----------------------------------");
+		System.out.println("ArrayNumber is " + players.getArrayNumber());
+		System.out.println("-----------------------------------");
+	}
+	
+    @ Override
+	public void showPlayersList(Players players) {
+        System.out.println("-------------------------------------------------");
+        System.out.println("PlayersList: ");
+		for (String i : players.getPlayersList()) {
+			System.out.println(i + " ");
+		}
+		System.out.println("");
+		System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showInitialPlayersList(Players players) {
+        System.out.println("-------------------------------------------------");
+        System.out.println("initialPlayersList: ");
+		for (String i : players.getInitialPlayersList()) {
+			System.out.println(i + " ");
+		}
+		System.out.println("");
+		System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showFastCountPlayersList(Players players) {
+        System.out.println("-------------------------------------------------");
+        System.out.println("FastPlayersList: ");
+		for (int i : players.getFastCountPlayersList()) {
+			System.out.println(i + " ");
+		}
+		System.out.println("-------------------------------------------------");
+	}
+    
+    @ Override
+	public void showSomeString(Words words) {
+		System.out.println("-----------------------------------");
+		System.out.println("SomeString is " + words.getSomeString());
+		System.out.println("-----------------------------------");
+	}
+	
+    @ Override
+	public void showSomeNumber(Words words) {
+		System.out.println("-----------------------------------");
+		System.out.println("SomeNumber is " + words.getSomeNumber());
+		System.out.println("-----------------------------------");
+	}
+	
+    @ Override
+	public void showWordsNumber(Words words) {
+		System.out.println("-----------------------------------");
+		System.out.println("WordsNumber is " + words.getWordsNumber());
+		System.out.println("-----------------------------------");
+	}
+	
+    @ Override
+	public void showAnswer(Answers answer) {
+		System.out.println("-----------------------------------");
+		System.out.println("Answer is " + answer.getAnswer());
+		System.out.println("-----------------------------------");
+	}
+	
+    @ Override
+	public void showConfirmationAnswer(Answers answer) {
+		System.out.println("-----------------------------------");
+		System.out.println("ConfirmationAnswer is " + answer.getConfirmationAnswer());
+		System.out.println("-----------------------------------");
+	}
+	
+    @ Override
+	public void showPositiveAnswerList(Answers answer) {
+        System.out.println("-------------------------------------------------");
+        System.out.println("positiveAnswerList: ");
+        for (String s : answer.getPositiveAnswerList()) {
+        	System.out.println(s);
+        }
+		System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showNegativeAnswerList(Answers answer) {
+        System.out.println("-------------------------------------------------");
+        System.out.println("negativeAnswerList: ");
+        for (String s : answer.getNegativeAnswerList()) {
+        	System.out.println(s);
+        }
+		System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showString(String name, String value) {
+		System.out.println("-------------------------------------------------");
+	    System.out.println(name + " is: " + value);
+	    System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showNumber(String name, int value) {
+		System.out.println("-------------------------------------------------");
+	    System.out.println(name + " is: " + value);
+	    System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showBoolean(String name, boolean value) {
+		System.out.println("-------------------------------------------------");
+	    System.out.println(name + " is: " + value);
+	    System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showIntArrayList(String name, ArrayList<Integer> value) {
+		int n = 1;
+        System.out.println("-------------------------------------------------");
+        System.out.println(name + " includes: ");
+        for (int i : value) {
+        	System.out.println("  " + n + ") \"" + i + "\".");
+        	n++;
+        }
+		System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showStringArrayList(String name, ArrayList<String> value) {
+		int n = 1;
+        System.out.println("-------------------------------------------------");
+        System.out.println(name + " includes: ");
+        for (String s : value) {
+        	System.out.println("  " + n + ") \"" + s + "\".");
+        	n++;
+        }
+		System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showStringHashSet(String name, HashSet<String> value) {
+		int n = 1;
+        System.out.println("-------------------------------------------------");
+        System.out.println(name + " includes: ");
+        for (String s : value) {
+        	System.out.println("  " + n + ") \"" + s + "\".");
+        	n++;
+        }
+		System.out.println("-------------------------------------------------");
+	}
+	
+    @ Override
+	public void showIntHashSet(String name, HashSet<Integer> value) {
+		int n = 1;
+        System.out.println("-------------------------------------------------");
+        System.out.println(name + " includes: ");
+        for (int i : value) {
+        	System.out.println("  " + n + ") \"" + i + "\".");
+        	n++;
+        }
+		System.out.println("-------------------------------------------------");
+	}
 }

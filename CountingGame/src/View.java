@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public interface View {
 	void outputStart();  
@@ -12,8 +13,8 @@ public interface View {
 	void outputCountCheckAgain(int n);  
 	void outputEnterCountingAgain();  
 	void outputEnterCountingFastCount();  
-	void outputstartCounting();  
-	void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber);  
+	void outputstartCounting(int n, int i);  
+	void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber, int w);  
 	void outputConditions(ArrayList<String> arrayName, int arrayNumber, int wordsNumber);  
 	void outputChooseGameMode();  
 	void outputSetCountStartNumber();  
@@ -31,5 +32,27 @@ public interface View {
 	void outputIncorrectChoose();  
 	void outputWhat();  
 	void outputCheckedNumber();  
+	void showFinalNumber(Calculate calculate);
+	void showNumStep(Calculate calculate);
+    void showOutPlayer(Calculate calculate);
+    void showCountOrder(Calculate calculate);
+    void showArrayNumber(Players players);
+	void showPlayersList(Players players);
+	void showInitialPlayersList(Players players);
+	void showFastCountPlayersList(Players players);
+	void showSomeString(Words words);
+	void showSomeNumber(Words words);
+	void showWordsNumber(Words words);
+	void showAnswer(Answers answer);
+	void showConfirmationAnswer(Answers answer);
+	void showPositiveAnswerList(Answers answer);
+	void showNegativeAnswerList(Answers answer);
+	void showString(String name, String value);
+	void showNumber(String name, int value);
+	void showBoolean(String name, boolean value);
+	void showIntArrayList(String name, ArrayList<Integer> value);
+	void showStringArrayList(String name, ArrayList<String> value);
+	void showStringHashSet(String name, HashSet<String> value);
+	void showIntHashSet(String name, HashSet<Integer> value);
 }
 	 

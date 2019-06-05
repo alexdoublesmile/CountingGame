@@ -18,11 +18,6 @@ public class InputLayer implements ModelLayer {
 	}
 	
     @ Override
-	public void showPlayMode(Mode mode, String s) {
-		mode.showPlayMode();
-	}
-	
-    @ Override
 	public String getContinueMode(Mode mode) {
 		return mode.getContinueMode();
 	}
@@ -53,11 +48,6 @@ public class InputLayer implements ModelLayer {
 	}
 	
     @ Override
-	public void showArrayNumber(Players players) {
-		players.showArrayNumber();
-	}
-	
-    @ Override
 	public int getWordsNumber(Words words) {
 		return words.getWordsNumber();
 	}
@@ -70,11 +60,6 @@ public class InputLayer implements ModelLayer {
     @ Override
 	public void resetWordsNumber(Words words) {
 		words.resetWordsNumber();
-	}
-	
-    @ Override
-	public void showWordsNumber(Words words) {
-		words.showWordsNumber();
 	}
 	
     @ Override
@@ -95,25 +80,10 @@ public class InputLayer implements ModelLayer {
 	public void addToPlayersList(Players players, String s) {
 		players.addToPlayersList(s);
 	}
-	
-    @ Override
-	public void showPlayersList(Players players) {
-		players.showPlayersList();
-	}
-	
-    @ Override
-	public void showInitialPlayersList(Players players) {
-		players.showInitialPlayersList();
-	}
 	    
     @ Override
 	public ArrayList<Integer> getFastCountPlayersList(Players players) {
 		return players.getFastCountPlayersList();
-	}
-	
-    @ Override
-	public void showFastCountPlayersList(Players players) {
-		players.showFastCountPlayersList();
 	}	
 
     @ Override
@@ -133,17 +103,7 @@ public class InputLayer implements ModelLayer {
 
     @ Override
 	public void addToNegativeAnswerList(Answers answers) {
-		answers.addToPositiveAnswerList(answers.getAnswer().toLowerCase());
-	}
-	
-    @ Override
-	public void showPositiveAnswerList(Answers answers) {
-		answers.showPositiveAnswerList();
-	}
-	
-    @ Override
-	public void showNegativeAnswerList(Answers answers) {
-		answers.showNegativeAnswerList();
+		answers.addToNegativeAnswerList(answers.getAnswer().toLowerCase());
 	}	
 	
     @ Override
@@ -195,11 +155,6 @@ public class InputLayer implements ModelLayer {
     @ Override
 	public void setCountOrder(Calculate calculate, String s) {
 		calculate.setCountOrder(s);
-	}
-	
-    @ Override
-    public void showCountOrder(Calculate calculate) {
-    	calculate.showCountOrder();
 	}
     
     @ Override
@@ -255,11 +210,6 @@ public class InputLayer implements ModelLayer {
     @ Override
 	public void setOutPlayer(Calculate calculate, String s) {
 		calculate.setOutPlayer(s);
-	}
-
-    @ Override
-	public void showOutPlayer(Calculate calculate) {
-		calculate.showOutPlayer();
 	}
     
     @ Override
@@ -346,11 +296,6 @@ public class InputLayer implements ModelLayer {
 	}
 	
     @ Override
-	public void showSomeString(Words words) {
-		words.showSomeString();	
-	}
-	
-    @ Override
 	public boolean checkStringIsReal(Words words, String s) {
 		if(!(words.checkStringIsReal(s))) {
 			return false;
@@ -380,11 +325,6 @@ public class InputLayer implements ModelLayer {
 	public void setSomeNumber(Words words, int i) {
 		words.setSomeNumber(i);
 	}
-	
-    @ Override
-	public void showSomeNumber(Words words) {
-		words.showSomeNumber();	
-	}
 
 //////// --- Answers --- ///////////	
 	
@@ -397,11 +337,6 @@ public class InputLayer implements ModelLayer {
 	public void setAnswer(Answers answers, String s) {
 		answers.setAnswer(s);
 	}
-
-    @ Override
-	public void showAnswer(Answers answers) {
-		answers.showAnswer();
-	}
 	
     @ Override
 	public String getConfirmationAnswer(Answers answers) {
@@ -411,11 +346,6 @@ public class InputLayer implements ModelLayer {
     @ Override
 	public void setConfirmationAnswer(Answers answers, String s) {
 		answers.setConfirmationAnswer(s);	
-	}
-	
-    @ Override
-	public void showConfirmationAnswer(Answers answers) {
-		answers.showConfirmationAnswer();	
 	}
 	
     @ Override

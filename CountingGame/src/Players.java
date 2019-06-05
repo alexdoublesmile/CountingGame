@@ -25,12 +25,6 @@ public class Players {
 		this.arrayNumber--;
 	}
 	
-	public void showArrayNumber() {
-		System.out.println("-----------------------------------");
-		System.out.println("ArrayNumber is " + arrayNumber);
-		System.out.println("-----------------------------------");
-	}
-	
 	public int getInitialArrayNumber() {
 		return initialArrayNumber;
 	}
@@ -55,34 +49,20 @@ public class Players {
 		this.numberOfPlayer = 1;
 	}
 	
-	public void numberingOfPlayers(int n) {
-        for(int i = 1; i <= n; i++) {
-        	fastCountPlayersList.add(i);
-        }
-    }
-	
 	public ArrayList<Integer> getFastCountPlayersList() {
 		return fastCountPlayersList;
-	}
-	
-	public void setFastCountPlayersList(ArrayList<Integer> fastCountPlayersList) {
-		this.fastCountPlayersList = fastCountPlayersList;
 	}
 
 	public ArrayList<String> getPlayersList() {
 		return playersList;
 	}
+	
 	public int getPlayersListSize() {
 		return playersList.size();
 	}
-	public void setPlayersList(ArrayList<String> playersList) {
-		this.playersList = playersList;
-	}
+
 	public ArrayList<String> getInitialPlayersList() {
 		return initialPlayersList;
-	}
-	public void setInitialPlayersList(ArrayList<String> initialPlayersList) {
-		this.initialPlayersList = initialPlayersList;
 	}
 	
 	public void addToPlayersList(String s) {
@@ -91,36 +71,6 @@ public class Players {
 
 	public void addToInitialPlayersList(String s) {
 		initialPlayersList.add(s);
-	}
-		
-	public void showPlayersList() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("PlayersList: ");
-		for (String i : playersList) {
-			System.out.print(i + " ");
-		}
-		System.out.println("");
-		System.out.println("-------------------------------------------------");
-	}
-	
-	public void showInitialPlayersList() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("initialPlayersList: ");
-		for (String i : initialPlayersList) {
-			System.out.print(i + " ");
-		}
-		System.out.println("");
-		System.out.println("-------------------------------------------------");
-	}
-	
-	public void showFastCountPlayersList() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("FastPlayersList: ");
-		for (int i : fastCountPlayersList) {
-			System.out.print(i + " ");
-		}
-		System.out.println("");
-		System.out.println("-------------------------------------------------");
 	}
 	
 	public void copySettings() {
@@ -133,4 +83,10 @@ public class Players {
 		playersList = initialPlayersList;
 	    arrayNumber = initialArrayNumber;
 	}
+	
+	public void numberingOfPlayers(int n) {
+        for(int i = 1; i <= n; i++) {
+        	fastCountPlayersList.add(i);
+        }
+    }
 }

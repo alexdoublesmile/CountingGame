@@ -16,11 +16,7 @@ public class Calculate {
 	public void setFinalNumber(int finalNumber) {
 		this.finalNumber = finalNumber;
 	}
-	public void showFinalNumber() {
-		System.out.println("-------------------------------------------------");
-	    System.out.println("showFinalNumber: " + getFinalNumber());
-	    System.out.println("-------------------------------------------------");
-	}
+	
 	public int getNumStep() {
 		return numStep;
 	}
@@ -33,22 +29,14 @@ public class Calculate {
 	public void increaseNumStep() {
 		numStep++;
 	}
-	public void showNumStep() {
-		System.out.println("-------------------------------------------------");
-	    System.out.println("showNumStep: " + getNumStep());
-	    System.out.println("-------------------------------------------------");
-	}
+	
 	public String getOutPlayer() {
 		return outPlayer;
 	}
 	public void setOutPlayer(String outPlayer) {
 		this.outPlayer = outPlayer;
 	}
-	public void showOutPlayer() {
-		System.out.println("-------------------------------------------------");
-	    System.out.println("showOutPlayer: " + getOutPlayer());
-	    System.out.println("-------------------------------------------------");
-	}
+	
 	public int getStartNumber() {
 		return startNumber;
 	}
@@ -67,11 +55,7 @@ public class Calculate {
 	public void setCountOrder(String countOrder) {
 		this.countOrder = countOrder;
 	}
-	public void showCountOrder() {
-		System.out.println("-------------------------------------------------");
-	    System.out.println("showCountOrder: " + getCountOrder());
-	    System.out.println("-------------------------------------------------");
-	}
+	
 	public void increaseCountOrder() {
 		countOrder = "2";
 	}

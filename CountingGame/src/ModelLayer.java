@@ -9,18 +9,15 @@ public interface ModelLayer {
 
 	String getPlayMode(Mode mode);
 	void setPlayMode(Mode mode, String s);
-	void showPlayMode(Mode mode, String s);
 	String getContinueMode(Mode mode);
 	void setContinueMode(Mode mode, String s);
 	int getArrayNumber(Players players);
 	void setArrayNumber(Players players, int i);
 	void increaseArrayNumber(Players players);
 	void reduceArrayNumber(Players players);
-	void showArrayNumber(Players players);
 	int getWordsNumber(Words wordsNumber);
 	void setWordsNumber(Words wordsNumber, int i);
 	void resetWordsNumber(Words wordsNumber);
-	void showWordsNumber(Words wordsNumber);
 	int countWordsFromString(Words wordsNumber, String s);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,16 +26,11 @@ public interface ModelLayer {
 
 	ArrayList<String> getPlayersList(Players players);
 	void addToPlayersList(Players players, String s);
-	void showPlayersList(Players players);
-	void showInitialPlayersList(Players players);
 	ArrayList<Integer> getFastCountPlayersList(Players players);
-	void showFastCountPlayersList(Players players);
 	HashSet<String> getPositiveAnswerList(Answers answers);
 	HashSet<String> getNegativeAnswerList(Answers answers);
 	void addToPositiveAnswerList(Answers answers);
 	void addToNegativeAnswerList(Answers answers);
-	void showPositiveAnswerList(Answers answers);
-	void showNegativeAnswerList(Answers answers);
 	void copySettings(Players players);
 	void returnSettings(Players players);
 	void numberingOfPlayers(Players players, int n);
@@ -55,7 +47,6 @@ public interface ModelLayer {
 	void setStepNumber(Calculate calculate, int i);
 	String getCountOrder(Calculate calculate);
 	void setCountOrder(Calculate calculate, String s);
-	void showCountOrder(Calculate calculate);
 	void increaseCountOrder(Calculate calculate);
 	void increaseMoreCountOrder(Calculate calculate);
 	void resetCountOrder(Calculate calculate);
@@ -67,7 +58,6 @@ public interface ModelLayer {
 	void increaseNumStep(Calculate calculate);
 	String getOutPlayer(Calculate calculate);
 	void setOutPlayer(Calculate calculate, String s);
-	public void showOutPlayer(Calculate calculate);
 	void mainCalc(Players players, Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber);
 
 ////////////--- fast count ---  ////////////	
@@ -95,22 +85,18 @@ public interface ModelLayer {
 	String inputAnyString(Words wordsNumber);
 	String getSomeString(Words wordsNumber);
 	void setSomeString(Words wordsNumber, String s);
-	void showSomeString(Words wordsNumber);
 	boolean checkStringIsReal(Words wordsNumber, String s);
 	boolean checkStringIsOnlyNumber(Words wordsNumber, String s);
 	int getNumberFromSomeString(Words wordsNumber, String s);
 	int getSomeNumber(Words wordsNumber);
 	void setSomeNumber(Words wordsNumber, int i);
-	void showSomeNumber(Words wordsNumber);
 
 ////////--- Answers --- ///////////	
 
 	String getAnswer(Answers answers);
 	void setAnswer(Answers answers, String s);
-	void showAnswer(Answers answers);
 	String getConfirmationAnswer(Answers answers);
 	void setConfirmationAnswer(Answers answers, String s);
-	void showConfirmationAnswer(Answers answers);
 	boolean checkPositiveOrNegativeAnswer(Answers answers);
 	boolean checkNegativeAnswer(Answers answers);		
 }
