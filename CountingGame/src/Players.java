@@ -2,36 +2,10 @@ import java.util.ArrayList;
 
 public class Players {
 	
-    private int arrayNumber = 1;
-    private int initialArrayNumber = 1;
 	private int numberOfPlayer = 1;
     private ArrayList<String> playersList = new ArrayList<String>(16);
     private ArrayList<String> initialPlayersList = new ArrayList<String>(16);
     private ArrayList<Integer> fastCountPlayersList = new ArrayList<Integer>(16);
-
-	public int getArrayNumber() {
-		return arrayNumber;
-	}
-    
-	public void setArrayNumber(int arrayNumber) {
-		this.arrayNumber = arrayNumber;
-	}
-	
-	public void increaseArrayNumber() {
-		this.arrayNumber++;
-	}
-	
-	public void reduceArrayNumber() {
-		this.arrayNumber--;
-	}
-	
-	public int getInitialArrayNumber() {
-		return initialArrayNumber;
-	}
-	
-	public void setInitialArrayNumber(int initialArrayNumber) {
-		this.initialArrayNumber = initialArrayNumber;
-	}
 
 	public int getNumberOfPlayer() {
 		return numberOfPlayer;
@@ -61,6 +35,10 @@ public class Players {
 		return playersList.size();
 	}
 
+	public int getFastCountPlayersListSize() {
+		return fastCountPlayersList.size();
+	}
+	
 	public ArrayList<String> getInitialPlayersList() {
 		return initialPlayersList;
 	}
@@ -76,12 +54,10 @@ public class Players {
 	public void copySettings() {
 		ArrayList<String> copyOfPlayersList = new ArrayList<String>(playersList);
 		initialPlayersList = copyOfPlayersList;
-		initialArrayNumber = arrayNumber;
 	}
 
 	public void returnSettings() {
 		playersList = initialPlayersList;
-	    arrayNumber = initialArrayNumber;
 	}
 	
 	public void numberingOfPlayers(int n) {

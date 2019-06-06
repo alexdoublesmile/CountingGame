@@ -42,7 +42,8 @@ public class Controller {
 	void setNumberOfPlayers(Players players, Words words) {
 		view.outputEnterPlayersFastCount();
         checkStringIsOnlyNumber(words); 
-        modelLayer.setArrayNumber(players, modelLayer.getNumberFromSomeString(words, modelLayer.getSomeString(words)));
+		modelLayer.numberingOfPlayers(players, modelLayer.getNumberFromSomeString(words, modelLayer.getSomeString(words)));
+
     }	
 	void setNumberOfWords(Players players, Words words) {
 		view.outputEnterCountingFastCount();
@@ -50,8 +51,7 @@ public class Controller {
         modelLayer.setWordsNumber(words, modelLayer.getNumberFromSomeString(words, modelLayer.getSomeString(words)));
     }	
 	void fastCalculation(Players players, Words words, Calculate calculate, Answers answer, Mode mode) {
-		modelLayer.numberingOfPlayers(players, modelLayer.getArrayNumber(players));
-        modelLayer.fastCalc(calculate, modelLayer.getFastCountPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getWordsNumber(words));
+        modelLayer.fastCalc(calculate, modelLayer.getFastCountPlayersList(players), modelLayer.getWordsNumber(words));
         view.outputResultFastCount(modelLayer.getFastCountPlayersList(players));
         view.outputPlayAgain();
         playAgain(players, words, answer, mode);
@@ -70,7 +70,6 @@ public class Controller {
 		checkStringIsReal(words, answer);
 		modelLayer.increaseNumberOfPlayer(players);
 		if (modelLayer.getNumberOfPlayer(players) == 2) {
-			modelLayer.increaseArrayNumber(players);
 			modelLayer.addToPlayersList(players, modelLayer.getSomeString(words));
 			startDetailGame(players, words, answer, mode);
 		} else if (modelLayer.getNumberOfPlayer(players) > 2) {
@@ -86,7 +85,7 @@ public class Controller {
         } else {
         	countNumberOfWords(players, words, answer, mode);
         }
-    	view.outputConditions(modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getWordsNumber(words));
+    	view.outputConditions(modelLayer.getPlayersList(players), modelLayer.getWordsNumber(words));
     	startDetailGameCount(players, words, answer, mode);
 	}
 
@@ -142,7 +141,7 @@ public class Controller {
 	    }	
 	}		
 	void results(Players players, Words words, Answers answer, Mode mode) {
-		view.outputResult(modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players));
+		view.outputResult(modelLayer.getPlayersList(players));
 	    view.outputPlayAgain();
         playAgain(players, words, answer, mode);
 	}	
@@ -159,7 +158,6 @@ public class Controller {
 		if (!(checkAnswer(words, answer))) {
 			modelLayer.resetNumberOfPlayer(players);
         } else {
-        	modelLayer.increaseArrayNumber(players);
         	startDetailGame(players, words, answer, mode);
         }
 	}
@@ -230,17 +228,16 @@ public class Controller {
 	
 	void calculate(Players players, Words words, Answers answer, Calculate calculate, Mode mode) {
     	view.outputstartCounting(modelLayer.getStartNumber(calculate), modelLayer.getStepNumber(calculate));
-        view.outputAllPlayers(modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getWordsNumber(words));
+        view.outputAllPlayers(modelLayer.getPlayersList(players), modelLayer.getWordsNumber(words));
         modelLayer.resetNumStep(calculate);
         modelLayer.setFinalNumber(calculate, modelLayer.getWordsNumber(words)*modelLayer.getStepNumber(calculate) - modelLayer.getStepNumber(calculate) + modelLayer.getStartNumber(calculate));
-        while(modelLayer.getArrayNumber(players) > 1) {
+        while(modelLayer.getPlayersListSize(players) > 1) {
         	if (modelLayer.getNumberFromSomeString(words, modelLayer.getCountOrder(calculate)) < 3) {
-            	modelLayer.mainCalc(players, calculate, modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getWordsNumber(words));
+            	modelLayer.mainCalc(players, calculate, modelLayer.getPlayersList(players), modelLayer.getWordsNumber(words));
         	} else {
-        		modelLayer.newCalc(players, calculate, modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getWordsNumber(words));
+        		modelLayer.newCalc(players, calculate, modelLayer.getPlayersList(players), modelLayer.getWordsNumber(words));
         	} 
-        	modelLayer.reduceArrayNumber(players);
-        	view.outputTempResult(modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getNumStep(calculate), modelLayer.getOutPlayer(calculate));
+        	view.outputTempResult(modelLayer.getPlayersList(players), modelLayer.getNumStep(calculate), modelLayer.getOutPlayer(calculate));
         	modelLayer.increaseNumStep(calculate);
         }        
         results(players, words, answer, mode);
@@ -253,6 +250,7 @@ public class Controller {
     	modelLayer.setAnswer(answer, modelLayer.inputAnyString(words));
         if (!(checkAnswer(words, answer))) {
             view.outputFinal();
+            modelLayer.closeScanner(words);
             System.exit(0);
         } else {
             if(modelLayer.getPlayMode(mode).equals("2")) {
@@ -279,7 +277,7 @@ public class Controller {
                 break;
             case ("3"):
             	modelLayer.returnSettings(players);
-            	view.outputConditions(modelLayer.getPlayersList(players), modelLayer.getArrayNumber(players), modelLayer.getWordsNumber(words));
+            	view.outputConditions(modelLayer.getPlayersList(players), modelLayer.getWordsNumber(words));
             	startDetailGameCount(players, words, answer, mode);
                 break;
             default:

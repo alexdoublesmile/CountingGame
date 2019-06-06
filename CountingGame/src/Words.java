@@ -35,12 +35,21 @@ public class Words {
 	public void resetWordsNumber() {
 		this.wordsNumber = 0;
 	}
-			
+		
+	public Scanner getScanner() {
+		  Scanner scanString = new Scanner(System.in);
+		  return scanString;
+		}
+	
 	public String inputAnyString() {
-	  Scanner scanString = new Scanner(System.in);
-	  String s = scanString.nextLine();
+	  String s = getScanner().nextLine();
 	  return s;
 	}
+		
+	public void closeScanner() {
+		getScanner().close();
+		}
+	
 	
 	public boolean checkStringIsReal(String someString) {
 		if(someString.equals("") || someString.equals(" ")) {

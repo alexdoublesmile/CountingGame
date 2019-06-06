@@ -14,14 +14,14 @@ public interface View {
 	void outputEnterCountingAgain();  
 	void outputEnterCountingFastCount();  
 	void outputstartCounting(int n, int i);  
-	void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber, int w);  
-	void outputConditions(ArrayList<String> arrayName, int arrayNumber, int wordsNumber);  
+	void outputAllPlayers(ArrayList<String> arrayName, int w);  
+	void outputConditions(ArrayList<String> arrayName, int wordsNumber);  
 	void outputChooseGameMode();  
 	void outputSetCountStartNumber();  
 	void outputSetCountStepNumber();  
 	void outputSetCountOrder();  
-	void outputTempResult(ArrayList<String> arrayName, int arrayNumber, int num, String out);  
-	void outputResult(ArrayList<String> arrayName, int arrayNumber);  
+	void outputTempResult(ArrayList<String> arrayName, int num, String out);  
+	void outputResult(ArrayList<String> arrayName);  
 	void outputResultFastCount(ArrayList<Integer> arrayName);  
 	void outputPlayAgain();  
 	void outputChooseContinue(); 
@@ -36,7 +36,6 @@ public interface View {
 	void showNumStep(Calculate calculate);
     void showOutPlayer(Calculate calculate);
     void showCountOrder(Calculate calculate);
-    void showArrayNumber(Players players);
 	void showPlayersList(Players players);
 	void showInitialPlayersList(Players players);
 	void showFastCountPlayersList(Players players);

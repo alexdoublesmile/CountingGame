@@ -11,10 +11,6 @@ public interface ModelLayer {
 	void setPlayMode(Mode mode, String s);
 	String getContinueMode(Mode mode);
 	void setContinueMode(Mode mode, String s);
-	int getArrayNumber(Players players);
-	void setArrayNumber(Players players, int i);
-	void increaseArrayNumber(Players players);
-	void reduceArrayNumber(Players players);
 	int getWordsNumber(Words wordsNumber);
 	void setWordsNumber(Words wordsNumber, int i);
 	void resetWordsNumber(Words wordsNumber);
@@ -27,6 +23,8 @@ public interface ModelLayer {
 	ArrayList<String> getPlayersList(Players players);
 	void addToPlayersList(Players players, String s);
 	ArrayList<Integer> getFastCountPlayersList(Players players);
+	int getPlayersListSize(Players players);
+	int getFastCountPlayersListSize(Players players);
 	HashSet<String> getPositiveAnswerList(Answers answers);
 	HashSet<String> getNegativeAnswerList(Answers answers);
 	void addToPositiveAnswerList(Answers answers);
@@ -58,7 +56,7 @@ public interface ModelLayer {
 	void increaseNumStep(Calculate calculate);
 	String getOutPlayer(Calculate calculate);
 	void setOutPlayer(Calculate calculate, String s);
-	void mainCalc(Players players, Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber);
+	void mainCalc(Players players, Calculate calculate, ArrayList<String> playersList, int wordsNumber);
 
 ////////////--- fast count ---  ////////////	
 
@@ -66,11 +64,11 @@ public interface ModelLayer {
 	void setNumberOfPlayer(Players players, int s);
 	void increaseNumberOfPlayer(Players players);
 	void resetNumberOfPlayer(Players players);
-	void fastCalc(Calculate calculate, ArrayList<Integer> fastCountPlayersList, int arrayNumber, int wordsNumber);
+	void fastCalc(Calculate calculate, ArrayList<Integer> fastCountPlayersList, int wordsNumber);
 
 ///////	----- new count --- ///////
 
-	void newCalc(Players players, Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber);
+	void newCalc(Players players, Calculate calculate, ArrayList<String> playersList, int wordsNumber);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////--- Service and Answers methods ---////////////////////////////////////////////////////////////////
@@ -86,7 +84,8 @@ public interface ModelLayer {
 	int getNumberFromSomeString(Words wordsNumber, String s);
 	int getSomeNumber(Words wordsNumber);
 	void setSomeNumber(Words wordsNumber, int i);
-
+	void closeScanner(Words words);
+	
 ////////--- Answers --- ///////////	
 
 	String getAnswer(Answers answers);

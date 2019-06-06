@@ -37,8 +37,8 @@ public class ConsoleView implements View {
 
     @ Override
     public void outputResultFastCount(ArrayList<Integer> arrayName) {
-        for (int i = 0; i < 1; i++) {
-            System.out.print("Остается: " + arrayName.get(i));
+        for (int i : arrayName) {
+            System.out.print("Остается: " + i);
             System.out.println("");
         }
     }
@@ -89,7 +89,7 @@ public class ConsoleView implements View {
     }
 
     @ Override
-    public void outputAllPlayers(ArrayList<String> arrayName, int arrayNumber, int w) {
+    public void outputAllPlayers(ArrayList<String> arrayName, int w) {
         System.out.println("Все участники(считаем до " + w + "): ");
     	int n = 1;
         for (String s : arrayName) {
@@ -101,9 +101,9 @@ public class ConsoleView implements View {
     }
 
     @ Override
-    public  void outputConditions(ArrayList<String> arrayName, int arrayNumber, int wordsNumber) {
+    public  void outputConditions(ArrayList<String> arrayName, int wordsNumber) {
         System.out.println("----------------------------------------------------------------");
-        System.out.println("Принимают участие " + arrayNumber + " игроков:  ");
+        System.out.println("Принимают участие " + arrayName.size() + " игроков:  ");
         int n = 1;
         for (String s : arrayName) {
         	System.out.println("  " + n + ") \"" + s + "\"");
@@ -147,8 +147,8 @@ public class ConsoleView implements View {
     }
 
     @ Override
-    public  void outputTempResult(ArrayList<String> arrayName, int arrayNumber, int num, String out) {
-        if(!(arrayNumber == 1)) {
+    public  void outputTempResult(ArrayList<String> arrayName, int num, String out) {
+        if(!(arrayName.size() == 1)) {
             System.out.println("Шаг " + num + ". Вылетает: " + out);
             System.out.println("Остаются: ");
             int n = 1;
@@ -165,9 +165,9 @@ public class ConsoleView implements View {
     }
 
     @ Override
-    public  void outputResult(ArrayList<String> arrayName, int arrayNumber) {
-        for (int i = 0; i < arrayNumber; i++) {
-            System.out.print("* Поздравляем Вас, " + arrayName.get(i) + ". Вы - победитель! *");
+    public  void outputResult(ArrayList<String> arrayName) {
+        for (String s : arrayName) {
+            System.out.print("* Поздравляем Вас, " + s + ". Вы - победитель! *");
         }
         System.out.println("");
     }
@@ -255,13 +255,6 @@ public class ConsoleView implements View {
 		System.out.println("-------------------------------------------------");
 	    System.out.println("showCountOrder: " + calculate.getCountOrder());
 	    System.out.println("-------------------------------------------------");
-	}
-    
-    @ Override
-	public void showArrayNumber(Players players) {
-		System.out.println("-----------------------------------");
-		System.out.println("ArrayNumber is " + players.getArrayNumber());
-		System.out.println("-----------------------------------");
 	}
 	
     @ Override

@@ -26,26 +26,6 @@ public class InputLayer implements ModelLayer {
 	public void setContinueMode(Mode mode, String s) {
 		mode.setContinueMode(s);
 	}
-
-    @ Override
-	public int getArrayNumber(Players players) {
-		return players.getArrayNumber();
-	}
-	
-    @ Override
-	public void setArrayNumber(Players players, int i) {
-		players.setArrayNumber(i);
-	}
-	
-    @ Override
-	public void increaseArrayNumber(Players players) {
-		players.increaseArrayNumber();
-	}
-	
-    @ Override
-	public void reduceArrayNumber(Players players) {
-		players.reduceArrayNumber();
-	}
 	
     @ Override
 	public int getWordsNumber(Words words) {
@@ -86,6 +66,16 @@ public class InputLayer implements ModelLayer {
 		return players.getFastCountPlayersList();
 	}	
 
+    @ Override
+    public int getPlayersListSize(Players players) {
+		return players.getPlayersListSize();
+	}
+
+    @ Override
+    public int getFastCountPlayersListSize(Players players) {
+		return players.getFastCountPlayersListSize();
+	}
+	
     @ Override
 	public HashSet<String> getPositiveAnswerList(Answers answers) {
 		return answers.getPositiveAnswerList();
@@ -213,8 +203,8 @@ public class InputLayer implements ModelLayer {
 	}
     
     @ Override
-	public void mainCalc(Players players, Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber) {
-		calculate.mainCalc(players, playersList, arrayNumber, wordsNumber);
+	public void mainCalc(Players players, Calculate calculate, ArrayList<String> playersList, int wordsNumber) {
+		calculate.mainCalc(players, playersList, wordsNumber);
 	}
 	
 ////////////  --- fast count ---  ////////////	
@@ -240,15 +230,15 @@ public class InputLayer implements ModelLayer {
 	}
 	
     @ Override
-	public void fastCalc(Calculate calculate, ArrayList<Integer> fastCountPlayersList, int arrayNumber, int wordsNumber) {
-		calculate.fastCalc(fastCountPlayersList, arrayNumber, wordsNumber);
+	public void fastCalc(Calculate calculate, ArrayList<Integer> fastCountPlayersList, int wordsNumber) {
+		calculate.fastCalc(fastCountPlayersList, wordsNumber);
     }
 
 ///////	----- new count --- ///////
 	
     @ Override
-	public void newCalc(Players players, Calculate calculate, ArrayList<String> playersList, int arrayNumber, int wordsNumber) {
-		calculate.newCalc(players, playersList, arrayNumber, wordsNumber);
+	public void newCalc(Players players, Calculate calculate, ArrayList<String> playersList, int wordsNumber) {
+		calculate.newCalc(players, playersList, wordsNumber);
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -303,6 +293,11 @@ public class InputLayer implements ModelLayer {
 		words.setSomeNumber(i);
 	}
 
+    @ Override
+    public void closeScanner(Words words) {
+    	words.closeScanner();
+    }
+    
 //////// --- Answers --- ///////////	
 	
     @ Override
